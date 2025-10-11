@@ -3,42 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Shop - Purchase Options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/shop.css" />
+    <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
 </head>
 <body>
-    <h1>Shop</h1>
-    <h2>Purchase Options</h2>
-    <form action="/purchase" method="post">
-        <fieldset>
-            <legend>Select an item:</legend>
-            <label>
-                <input type="radio" name="item" value="bracelet">
-                Bracelet - $10
-            </label><br>
-            <label>
-                <input type="radio" name="item" value="necklace">
-                Necklace - $15
-            </label><br>
-            <label>
-                <input type="radio" name="item" value="earrings">
-                Earrings - $8
-            </label>
-        </fieldset>
-        <fieldset>
-            <legend>Quantity:</legend>
-            <input type="number" name="quantity" min="1" value="1">
-        </fieldset>
-        <fieldset>
-            <legend>Payment Method:</legend>
-            <label>
-                <input type="radio" name="payment" value="credit_card">
-                Credit Card
-            </label><br>
-            <label>
-                <input type="radio" name="payment" value="paypal">
-                PayPal
-            </label>
-        </fieldset>
-        <button type="submit">Purchase</button>
-    </form>
+    <header>
+        <h1 class="shop-title">EchoBeads Shop</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="shop-container">
+        <div class="product-grid">
+            <article class="product-card">
+                <img class="product-image" src="../pictures/bracelet.svg" alt="Glass Bracelet">
+                <div class="product-name">Glass Bracelet</div>
+                <div class="product-price">$10</div>
+                <button class="add-to-cart-btn">Add to cart</button>
+            </article>
+
+            <article class="product-card">
+                <img class="product-image" src="../pictures/necklace.svg" alt="Pearl Necklace">
+                <div class="product-name">Pearl Necklace</div>
+                <div class="product-price">$15</div>
+                <button class="add-to-cart-btn">Add to cart</button>
+            </article>
+
+            <article class="product-card">
+                <img class="product-image" src="../pictures/earrings.svg" alt="Earrings">
+                <div class="product-name">Handmade Earrings</div>
+                <div class="product-price">$8</div>
+                <button class="add-to-cart-btn">Add to cart</button>
+            </article>
+        </div>
+    </div>
 </body>
 </html>

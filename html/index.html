@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EchoBeads | Home</title>
-    <link rel="stylesheet" href="../css/pages/home.css" />
+    <link rel="stylesheet" href="../css/home.css" />
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
   </head>
 
@@ -16,13 +16,39 @@
         });
     </script>
 
-    <h1>EchoBeads - Beads That Echos</h1>
-    <pre>Welcome to EchoBeads, your one-stop shop for all things beads!<br>
-Here, you'll find a dazzling array of beads in every color, shape, and size imaginable.<br>
-Whether you're a seasoned jewelry maker or just starting out, we've got the perfect beads to bring your creative visions to life.<br>
-Our collection includes everything from classic glass beads to trendy acrylics, elegant pearls, and unique handmade
-  designs.<br>
-    
-    </pre>
+    <main>
+      <section id="hero">
+        <h2>Welcome to EchoBeads</h2>
+        <p>Welcome to EchoBeads, your one-stop shop for all things beads! Here you'll find a dazzling array of beads in every color, shape, and size imaginable.</p>
+        <p>Whether you're a seasoned jewelry maker or just starting out, we've got the perfect beads to bring your creative visions to life.</p>
+        <button class="btn" onclick="location.href='shop.html'">Shop Now</button>
+      </section>
+
+      <section id="featured">
+        <h2>Featured Collections</h2>
+        <p>Explore classic glass, trendy acrylics, elegant pearls, and unique handmade designs.</p>
+        <div>
+          <button>Browse Glass</button>
+          <button>Browse Pearls</button>
+        </div>
+      </section>
+
+      <section id="newsletter">
+        <h2>Join Our Newsletter</h2>
+        <p>Get updates on new arrivals and exclusive offers.</p>
+        <form>
+          <input type="email" placeholder="your@email.com" aria-label="email address" />
+          <button type="submit" class="btn">Subscribe</button>
+        </form>
+      </section>
+    </main>
+
+    <footer id="contact">
+      <p>&copy; <span id="year"></span> EchoBeads — handcrafted with care.</p>
+    </footer>
+    <script>
+      // set current year in footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
-<html>
+</html>
