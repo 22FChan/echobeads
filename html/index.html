@@ -42,13 +42,12 @@
         </form>
       </section>
     </main>
-
-    <footer id="contact">
-      <p>&copy; <span id="year"></span> EchoBeads — handcrafted with care.</p>
-    </footer>
     <script>
-      // set current year in footer
-      document.getElementById('year').textContent = new Date().getFullYear();
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.body.insertAdjacentHTML("beforeend", data);
+        });
     </script>
   </body>
 </html>
