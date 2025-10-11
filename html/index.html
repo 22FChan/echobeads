@@ -3,12 +3,18 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EchoBeads | Home</title>
-    <link rel="stylesheet" href="./css/pages/home.css" />
-    <link rel="icon" href="./images/logo_1.png">
+    <link rel="stylesheet" href="../css/pages/home.css" />
+    <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
   </head>
 
   <body>
-    {% include 'header.html' %}
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.body.insertAdjacentHTML("afterbegin", data);
+        });
+    </script>
 
     <h1>EchoBeads - Beads That Echos</h1>
     <pre>Welcome to EchoBeads, your one-stop shop for all things beads!<br>
