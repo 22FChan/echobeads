@@ -2,18 +2,19 @@
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f8f9fa;
+    background: #e5e7a1; /* global page background */
     color: #222;
     margin: 0;
     padding: 0;
 }
 
 .main-container {
-    max-width: 700px;
-    margin: 40px auto;
-    background: #e5e7a1;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    width: 95vw;
+    max-width: 1000px;
+    margin: 24px auto;
+    background: #ffffff; /* content boxes should be white */
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
     padding: 32px 28px;
 }
 
@@ -40,7 +41,7 @@ body {
 
 /* box directly behind rating controls */
 .rating-box {
-    background: #e5e7a1;
+    background: #ffffff; /* box should be white */
     padding: 20px;
     border-radius: 10px;
 }
@@ -67,7 +68,7 @@ h1, h2 {
     border: 1px solid #d1d5db;
     border-radius: 6px;
     font-size: 1rem;
-    background: #f4f6f8;
+    background: #ffffff; /* inputs should be white */
     transition: border-color 0.2s;
 }
 
@@ -104,11 +105,11 @@ h1, h2 {
 }
 
 .review-item {
-    background: #f4f6f8;
+    background: #ffffff; /* review boxes white */
     border-radius: 8px;
     padding: 18px 16px;
     margin-bottom: 18px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
 }
 
 .review-item .review-author {
