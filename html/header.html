@@ -1,10 +1,114 @@
 <link rel="stylesheet" href="../css/pages/header.css" />
-<nav style="display: flex; align-items: center; background: #ff0000; padding: 10px 0px;">
-    <img src="../pictures/logo_1.png" alt="Logo" style="height: 40px; margin-right: 20px;" href="./index.html">
-    <h1 style="margin: 0 30px 0 0; font-size: 1.5em;" href="./index.html">EchoBeads</h1>
-    <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
-        <li style="margin-right: 20px;"><a href="index.html" style="text-decoration: none; color: #333;">Home</a></li>
-        <li style="margin-right: 20px;"><a href="shop.html" style="text-decoration: none; color: #333;">Shop</a></li>
-        <li><a href="review.html" style="text-decoration: none; color: #333;">Review</a></li>
+<style>
+    /* small header cart styles (kept here so header fragment is self-contained) */
+    .site-nav { display:flex; align-items:center; gap:16px; background:#ff0000; padding:10px 16px; }
+    .site-nav .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:#fff; }
+    .site-nav ul { list-style:none; display:flex; gap:18px; margin:0; padding:0; align-items:center; }
+    .site-nav a { text-decoration:none; color:#fff; font-weight:600 }
+    .cart-btn { margin-left:auto; position:relative; background:transparent; border:none; cursor:pointer; color:#fff; font-size:16px; display:flex; align-items:center; gap:8px }
+    .cart-count { position:absolute; top:-6px; right:-6px; background:#ff0000; color:#fff; border-radius:999px; padding:2px 6px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.15)}
+    .cart-dropdown { position:absolute; right:0; top:44px; width:320px; background:#fff; color:#222; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.12); display:none; z-index:40; }
+    .cart-dropdown.open { display:block }
+    .cart-dropdown .items { max-height:280px; overflow:auto; padding:12px }
+    .cart-dropdown .item { display:flex; gap:10px; align-items:center; padding:8px 0; border-bottom:1px solid #eee }
+    .cart-dropdown .item img { width:48px; height:48px; object-fit:cover; border-radius:6px }
+    .cart-dropdown .actions { padding:12px; display:flex; gap:8px; justify-content:space-between }
+    .cart-dropdown .actions a, .cart-dropdown .actions button { background:#4f46e5; color:#fff; border:none; padding:8px 12px; border-radius:6px; text-decoration:none }
+</style>
+
+<nav class="site-nav">
+    <a class="brand" href="index.html"><img src="../pictures/logo_1.png" alt="EchoBeads" style="height:36px;"> <span>EchoBeads</span></a>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="review.html">Review</a></li>
     </ul>
+
+    <div style="position:relative">
+        <button id="cart-button" class="cart-btn" aria-expanded="false" aria-haspopup="true" title="Open cart">
+            🛒 Cart
+            <span id="cart-count" class="cart-count" aria-hidden="false">0</span>
+        </button>
+
+        <div id="cart-dropdown" class="cart-dropdown" role="dialog" aria-label="Shopping cart">
+            <div class="items" id="cart-items">Empty cart</div>
+            <div class="actions">
+                <a href="cart.html">View Cart</a>
+                <button id="clear-cart">Clear</button>
+            </div>
+        </div>
+    </div>
 </nav>
+
+<script>
+    // Simple cart stored in localStorage under key 'echobeads_cart'
+    (function(){
+        const KEY = 'echobeads_cart';
+
+        function getCart(){
+            try{ return JSON.parse(localStorage.getItem(KEY) || '[]') }catch(e){ return [] }
+        }
+
+        function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); updateBadge(); }
+
+        function updateBadge(){
+            const countEl = document.getElementById('cart-count');
+            if(!countEl) return;
+            const cart = getCart();
+            const total = cart.reduce((s,i)=> s + (i.qty||0), 0);
+            countEl.textContent = total;
+        }
+
+        function renderDropdown(){
+            const wrap = document.getElementById('cart-items');
+            const cart = getCart();
+            if(!wrap) return;
+            if(cart.length===0){ wrap.innerHTML = '<div style="padding:12px;color:#666">Your cart is empty.</div>'; return }
+            wrap.innerHTML = '';
+            cart.forEach(item=>{
+                const div = document.createElement('div'); div.className='item';
+                div.innerHTML = `<img src="${item.image||'../pictures/logo_1.png'}" alt="${item.name}"><div style="flex:1"><div style="font-weight:600">${item.name}</div><div style="color:#666">${item.qty} × $${item.price}</div></div><div style="font-weight:700">$${(item.price*item.qty).toFixed(2)}</div>`;
+                wrap.appendChild(div);
+            })
+        }
+
+        // public API
+        window.addToCart = function(item){
+            const cart = getCart();
+            const found = cart.find(i=> i.id === item.id);
+            if(found){ found.qty = (found.qty||1) + (item.qty||1) }
+            else cart.push(Object.assign({qty:1}, item));
+            saveCart(cart);
+            renderDropdown();
+        }
+
+        window.removeFromCart = function(id){
+            const cart = getCart().filter(i=> i.id !== id);
+            saveCart(cart); renderDropdown();
+        }
+
+        // UI events
+        document.addEventListener('click', function(e){
+            const btn = document.getElementById('cart-button');
+            const dd = document.getElementById('cart-dropdown');
+            if(!btn || !dd) return;
+            if(btn.contains(e.target)){
+                const open = dd.classList.toggle('open');
+                btn.setAttribute('aria-expanded', String(open));
+                renderDropdown();
+                return;
+            }
+            if(!dd.contains(e.target)){
+                dd.classList.remove('open');
+                btn.setAttribute('aria-expanded','false');
+            }
+        });
+
+        document.getElementById('clear-cart').addEventListener('click', function(){ localStorage.removeItem(KEY); renderDropdown(); updateBadge(); });
+
+        // initial badge
+        updateBadge();
+        // when storage changes in other tabs
+        window.addEventListener('storage', updateBadge);
+    })();
+</script>

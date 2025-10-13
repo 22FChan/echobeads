@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EchoBeads | Cart</title>
+  <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
+  <style>
+    body{font-family:Segoe UI, Arial, sans-serif; background:#f8fafc; margin:0; padding:0}
+    .container{max-width:1000px; margin:32px auto; padding:20px}
+    .cart-table{width:100%; border-collapse:collapse}
+    .cart-table th, .cart-table td{padding:12px; text-align:left; border-bottom:1px solid #eee}
+    .cart-item-img{width:70px; height:70px; object-fit:cover; border-radius:8px}
+    .qty-input{width:64px}
+    .totals{margin-top:20px; text-align:right; font-weight:700}
+    .btn{background:#4f46e5;color:#fff;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
+    .muted{color:#666}
+  </style>
+</head>
+<body>
+  <script>
+    fetch('header.html').then(r=>r.text()).then(t=>document.body.insertAdjacentHTML('afterbegin', t));
+  </script>
+
+  <div class="container">
+    <h1>Your Cart</h1>
+    <div id="cart-root">
+      <p class="muted">Loading cart...</p>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const KEY = 'echobeads_cart';
+      function getCart(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]') }catch(e){return[]} }
+      function saveCart(c){ localStorage.setItem(KEY, JSON.stringify(c)); window.dispatchEvent(new Event('storage')); render(); }
+
+      function format(n){ return '$'+n.toFixed(2) }
+
+      function render(){
+        const root = document.getElementById('cart-root');
+        const cart = getCart();
+        if(!cart.length){ root.innerHTML = '<p>Your cart is empty. <a href="shop.html">Go shopping</a></p>'; return }
+        let html = '<table class="cart-table"><thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead><tbody>';
+        cart.forEach((it, idx)=>{
+          html += `<tr data-idx="${idx}"><td><div style="display:flex;gap:12px;align-items:center"><img class=\"cart-item-img\" src=\"${it.image||'../pictures/logo_1.png'}\" alt=\"${it.name}\"><div>${it.name}</div></div></td><td>${format(it.price)}</td><td><input class=\"qty-input\" type=\"number\" min=\"1\" value=\"${it.qty}\" data-idx=\"${idx}\"></td><td>${format(it.price*it.qty)}</td><td><button class=\"btn remove\" data-idx=\"${idx}\">Remove</button></td></tr>`;
+        });
+        html += '</tbody></table>';
+        const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+        html += `<div class="totals">Total: ${format(total)}</div><div style="text-align:right;margin-top:10px"><button id=\"checkout\" class=\"btn\">Checkout</button></div>`;
+        root.innerHTML = html;
+
+        // attach listeners
+        root.querySelectorAll('.qty-input').forEach(inp=> inp.addEventListener('change', e=>{
+          const idx = Number(e.target.dataset.idx); const val = Math.max(1, Number(e.target.value)||1);
+          cart[idx].qty = val; saveCart(cart);
+        }));
+        root.querySelectorAll('.remove').forEach(btn=> btn.addEventListener('click', e=>{
+          const idx = Number(e.target.dataset.idx); cart.splice(idx,1); saveCart(cart);
+        }));
+        document.getElementById('checkout').addEventListener('click', function(){ alert('Checkout placeholder — integrate payment here'); localStorage.removeItem(KEY); render(); });
+      }
+
+      // initial render
+      render();
+
+    })();
+  </script>
+
+  <script>
+    // fetch footer after page
+    fetch('footer.html').then(r=>r.text()).then(t=>document.body.insertAdjacentHTML('beforeend', t));
+  </script>
+</body>
+</html>
