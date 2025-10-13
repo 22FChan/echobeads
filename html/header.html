@@ -42,7 +42,7 @@
             try{ return JSON.parse(localStorage.getItem(KEY) || '[]') }catch(e){ return [] }
         }
 
-    function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); updateBadge(); window.dispatchEvent(new Event('storage')); }
+        function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); updateBadge(); }
 
         function updateBadge(){
             const countEl = document.getElementById('cart-count');

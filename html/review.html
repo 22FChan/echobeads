@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EchoBeads | Review</title>
-    <meta name="description" content="Leave feedback for EchoBeads" />
-    <meta property="og:title" content="EchoBeads - Review" />
-    <meta property="og:description" content="Share your experience with EchoBeads" />
-    <link rel="stylesheet" href="../css/merge.css">
     <link rel="stylesheet" href="../css/review.css">
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
     <script>
       fetch("header.html")
         .then((response) => response.text())
@@ -20,27 +15,25 @@
           document.body.insertAdjacentHTML("afterbegin", data);
         });
     </script>
-<div class="page-center">
-    <main id="main-content" class="main-container rating-hero">
-        <h1>Rate Your Experience</h1>
-        <form class="review-form" action="/submit-review" method="post">
-                <div class="rating-box">
-                    <label for="rating">How would you rate us?</label>
-                    <select id="rating" name="rating" required>
-                            <option value="">Select</option>
-                            <option value="5">★★★★★ Excellent</option>
-                            <option value="4">★★★★ Good</option>
-                            <option value="3">★★★ Average</option>
-                            <option value="2">★★ Poor</option>
-                            <option value="1">★ Very Poor</option>
-                    </select>
-                </div>
-                <label for="comments">Additional Comments:</label>
-                <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-                <button type="submit">Submit Review</button>
-        </form>
-    </main>
-</div>
+<main>
+    <h1>Rate Your Experience</h1>
+    <form action="/submit-review" method="post">
+        <label for="rating">How would you rate us?</label>
+        <select id="rating" name="rating" required>
+            <option value="">Select</option>
+            <option value="5">★★★★★ Excellent</option>
+            <option value="4">★★★★ Good</option>
+            <option value="3">★★★ Average</option>
+            <option value="2">★★ Poor</option>
+            <option value="1">★ Very Poor</option>
+        </select>
+        <br><br>
+        <label for="comments">Additional Comments:</label><br>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+        <br><br>
+        <button type="submit">Submit Review</button>
+    </form>
+</main>
 <script>
     fetch("footer.html")
     .then((response) => response.text())

@@ -1,30 +1,4 @@
-<!-- footer styles moved to css/merge.css -->
-
-<footer class="site-footer" role="contentinfo">
-    <div class="footer-inner">
-        <div class="brand" aria-label="EchoBeads brand">
-            <img src="../pictures/logo_1.png" alt="EchoBeads logo"/>
-            <div>
-                <strong>EchoBeads</strong>
-                <div class="legal">Handcrafted beads & jewelry</div>
-            </div>
-        </div>
-
-        <nav aria-label="footer navigation">
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="contact.html">Contact</a>
-            <a href="#">Privacy</a>
-        </nav>
-
-        <div class="legal">&copy; <span id="year">2025</span> EchoBeads — All rights reserved.</div>
-    </div>
-</footer>
-
 <script>
-    // set current year dynamically when the fragment is inserted
-    (function setFooterYear(){
-        var el = document.getElementById('year');
-        if(el) el.textContent = new Date().getFullYear();
-    })();
+    // set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
 </script>

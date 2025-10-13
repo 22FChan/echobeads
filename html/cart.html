@@ -40,7 +40,7 @@
       function getCart(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]') }catch(e){return[]} }
       function saveCart(c){ localStorage.setItem(KEY, JSON.stringify(c)); window.dispatchEvent(new Event('storage')); render(); }
 
-  function format(n){ return '£'+n.toFixed(2) }
+      function format(n){ return '$'+n.toFixed(2) }
 
       function render(){
         const root = document.getElementById('cart-root');
@@ -51,8 +51,8 @@
           html += `<tr data-idx="${idx}"><td><div style="display:flex;gap:12px;align-items:center"><img class=\"cart-item-img\" src=\"${it.image||'../pictures/logo_1.png'}\" alt=\"${it.name}\"><div>${it.name}</div></div></td><td>${format(it.price)}</td><td><input class=\"qty-input\" type=\"number\" min=\"1\" value=\"${it.qty}\" data-idx=\"${idx}\"></td><td>${format(it.price*it.qty)}</td><td><button class=\"btn remove\" data-idx=\"${idx}\">Remove</button></td></tr>`;
         });
         html += '</tbody></table>';
-  const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
-  html += `<div class="totals">Total: ${format(total)}</div><div style="text-align:right;margin-top:10px"><button id=\"checkout\" class=\"btn\">Checkout</button></div>`;
+        const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+        html += `<div class="totals">Total: ${format(total)}</div><div style="text-align:right;margin-top:10px"><button id=\"checkout\" class=\"btn\">Checkout</button></div>`;
         root.innerHTML = html;
 
         // attach listeners
@@ -63,7 +63,7 @@
         root.querySelectorAll('.remove').forEach(btn=> btn.addEventListener('click', e=>{
           const idx = Number(e.target.dataset.idx); cart.splice(idx,1); saveCart(cart);
         }));
-        document.getElementById('checkout').addEventListener('click', function(){ alert('Checkout placeholder — integrate payment here'); localStorage.removeItem(KEY); render(); window.dispatchEvent(new Event('storage')); });
+        document.getElementById('checkout').addEventListener('click', function(){ alert('Checkout placeholder — integrate payment here'); localStorage.removeItem(KEY); render(); });
       }
 
       // initial render
