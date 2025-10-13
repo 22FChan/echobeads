@@ -7,25 +7,42 @@
     <link rel="stylesheet" href="../css/review.css">
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
 </head>
-<main>
-    <h1>Rate Your Experience</h1>
-    <form action="/submit-review" method="post">
-        <label for="rating">How would you rate us?</label>
-        <select id="rating" name="rating" required>
-            <option value="">Select</option>
-            <option value="5">★★★★★ Excellent</option>
-            <option value="4">★★★★ Good</option>
-            <option value="3">★★★ Average</option>
-            <option value="2">★★ Poor</option>
-            <option value="1">★ Very Poor</option>
-        </select>
-        <br><br>
-        <label for="comments">Additional Comments:</label><br>
-        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-        <br><br>
-        <button type="submit">Submit Review</button>
-    </form>
-</main>
-
+<body>
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.body.insertAdjacentHTML("afterbegin", data);
+        });
+    </script>
+<div class="page-center">
+    <main class="main-container rating-hero">
+        <h1>Rate Your Experience</h1>
+        <form class="review-form" action="/submit-review" method="post">
+                <div class="rating-box">
+                    <label for="rating">How would you rate us?</label>
+                    <select id="rating" name="rating" required>
+                            <option value="">Select</option>
+                            <option value="5">★★★★★ Excellent</option>
+                            <option value="4">★★★★ Good</option>
+                            <option value="3">★★★ Average</option>
+                            <option value="2">★★ Poor</option>
+                            <option value="1">★ Very Poor</option>
+                    </select>
+                </div>
+                <label for="comments">Additional Comments:</label>
+                <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+                <button type="submit">Submit Review</button>
+        </form>
+    </main>
+</div>
+<script>
+    fetch("footer.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.body.insertAdjacentHTML("beforeend", data);
+    });
+    </script>
+</body>
 <!-- Import footer -->
 <!--#include file="footer.html" -->
