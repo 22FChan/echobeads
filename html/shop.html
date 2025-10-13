@@ -2,38 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EchoBeads | Shop</title>
-  <meta name="description" content="Shop EchoBeads - browse our handmade beads and jewelry" />
-  <meta property="og:title" content="EchoBeads - Shop" />
-  <meta property="og:description" content="Browse and buy handmade beads and jewelry at EchoBeads" />
+    <title>Shop - Purchase Options</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../css/merge.css" />
-  <link rel="stylesheet" href="../css/shop.css" />
+    <title>EchoBeads | Home</title>
+    <link rel="stylesheet" href="../css/shop.css" />
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-    <script>
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.body.insertAdjacentHTML("afterbegin", data);
-        });
-    </script>
-
-  <div id="main-content" class="shop-container">
-    <div class="product-grid" id="products-grid">
-      <!-- product cards will be rendered here by js/catalog.js -->
-    </div>
-  </div>
-  <script src="../js/catalog.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', ()=> loadProducts('#products-grid'))</script>
-    <script>
-      fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.body.insertAdjacentHTML("beforeend", data);
-        });
-    </script>
+    <h1>Shop</h1>
+    <h2>Purchase Options</h2>
+    <form action="/purchase" method="post">
+        <fieldset>
+            <legend>Select an item:</legend>
+            <label>
+                <input type="radio" name="item" value="bracelet">
+                Bracelet - $10
+            </label><br>
+            <label>
+                <input type="radio" name="item" value="necklace">
+                Necklace - $15
+            </label><br>
+            <label>
+                <input type="radio" name="item" value="earrings">
+                Earrings - $8
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Quantity:</legend>
+            <input type="number" name="quantity" min="1" value="1">
+        </fieldset>
+        <fieldset>
+            <legend>Payment Method:</legend>
+            <label>
+                <input type="radio" name="payment" value="credit_card">
+                Credit Card
+            </label><br>
+            <label>
+                <input type="radio" name="payment" value="paypal">
+                PayPal
+            </label>
+        </fieldset>
+        <button type="submit">Purchase</button>
+    </form>
 </body>
 </html>

@@ -1,5 +1,0 @@
-[
-  {"id":"bracelet","name":"Glass Bracelet","price":10,"image":"../pictures/bracelet.svg","description":"Beautiful glass beads with gold accents."},
-  {"id":"necklace","name":"Pearl Necklace","price":15,"image":"../pictures/necklace.svg","description":"Elegant pearl necklace."},
-  {"id":"earrings","name":"Handmade Earrings","price":8,"image":"../pictures/earrings.svg","description":"Colorful handmade earrings."}
-]
