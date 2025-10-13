@@ -1,0 +1,32 @@
+/* merge.css - shared base and utilities for EchoBeads */
+
+/* CSS reset-ish */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;color:#222}
+
+/* Color tokens */
+:root{
+  --brand-1:#4f46e5; /* primary purple */
+  --accent:#ff0000;  /* red used across site */
+  --bg-soft:#e5e7a1; /* soft page background */
+  --card-bg:#ffffff; /* card/background for content */
+  --muted:#666;
+}
+
+/* Utility containers */
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+.center{display:flex;align-items:center;justify-content:center}
+
+/* Basic link reset */
+a{color:inherit}
+
+/* Shared button */
+.btn{background:var(--brand-1);color:#fff;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
+.btn-muted{background:#6b7280}
+
+/* Header/cart small helpers */
+.hidden{display:none!important}
+
+/* Small responsive helper */
+@media (max-width:640px){.container{padding:0 12px}}

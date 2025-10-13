@@ -1,11 +1,8 @@
 /* home.css - Styles for index.html */
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    /* common font/color/padding moved to merge.css */
     background: linear-gradient(120deg, #f8fafc 0%, #e5e7a1 100%);
-    color: #22223b;
-    margin: 0;
-    padding: 0;
 }
 
 

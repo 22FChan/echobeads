@@ -1,13 +1,5 @@
 /* review.css */
 
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #e5e7a1; /* global page background */
-    color: #222;
-    margin: 0;
-    padding: 0;
-}
-
 .main-container {
     width: 95vw;
     max-width: 1000px;
