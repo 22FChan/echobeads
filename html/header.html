@@ -42,7 +42,7 @@
             try{ return JSON.parse(localStorage.getItem(KEY) || '[]') }catch(e){ return [] }
         }
 
-        function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); updateBadge(); }
+    function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); updateBadge(); window.dispatchEvent(new Event('storage')); }
 
         function updateBadge(){
             const countEl = document.getElementById('cart-count');
@@ -115,8 +115,8 @@
         (function highlightActive(){ try{ const path = location.pathname.split('/').pop() || 'index.html'; document.querySelectorAll('.site-nav a').forEach(a=>{ if(a.getAttribute('href') === path) a.style.textDecoration='underline'; }); }catch(e){} })();
 
     // clear handlers
-    const clearBtn = document.getElementById('clear-cart'); if(clearBtn) clearBtn.addEventListener('click', function(){ localStorage.removeItem(KEY); renderDrawer(); updateBadge(); });
-    const drawerClear = document.getElementById('drawer-clear'); if(drawerClear) drawerClear.addEventListener('click', function(){ localStorage.removeItem(KEY); renderDrawer(); updateBadge(); });
+    const clearBtn = document.getElementById('clear-cart'); if(clearBtn) clearBtn.addEventListener('click', function(){ saveCart([]); renderDrawer(); });
+    const drawerClear = document.getElementById('drawer-clear'); if(drawerClear) drawerClear.addEventListener('click', function(){ saveCart([]); renderDrawer(); });
 
         // initial badge
         updateBadge();

@@ -40,7 +40,7 @@
       function getCart(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]') }catch(e){return[]} }
       function saveCart(c){ localStorage.setItem(KEY, JSON.stringify(c)); window.dispatchEvent(new Event('storage')); render(); }
 
-      function format(n){ return '$'+n.toFixed(2) }
+  function format(n){ return '£'+n.toFixed(2) }
 
       function render(){
         const root = document.getElementById('cart-root');
@@ -63,7 +63,7 @@
         root.querySelectorAll('.remove').forEach(btn=> btn.addEventListener('click', e=>{
           const idx = Number(e.target.dataset.idx); cart.splice(idx,1); saveCart(cart);
         }));
-        document.getElementById('checkout').addEventListener('click', function(){ alert('Checkout placeholder — integrate payment here'); localStorage.removeItem(KEY); render(); });
+  document.getElementById('checkout').addEventListener('click', function(){ alert('Checkout placeholder — integrate payment here'); localStorage.removeItem(KEY); window.dispatchEvent(new Event('storage')); render(); });
       }
 
       // initial render
