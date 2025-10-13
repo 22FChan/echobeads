@@ -1,0 +1,25 @@
+<!-- Import header -->
+<!--#include file="header.html" -->
+
+<main>
+    <h1>Rate Your Experience</h1>
+    <form action="/submit-review" method="post">
+        <label for="rating">How would you rate us?</label>
+        <select id="rating" name="rating" required>
+            <option value="">Select</option>
+            <option value="5">★★★★★ Excellent</option>
+            <option value="4">★★★★ Good</option>
+            <option value="3">★★★ Average</option>
+            <option value="2">★★ Poor</option>
+            <option value="1">★ Very Poor</option>
+        </select>
+        <br><br>
+        <label for="comments">Additional Comments:</label><br>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+        <br><br>
+        <button type="submit">Submit Review</button>
+    </form>
+</main>
+
+<!-- Import footer -->
+<!--#include file="footer.html" -->

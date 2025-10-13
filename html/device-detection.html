@@ -1,0 +1,21 @@
+<script>
+  function deviceClass() {
+    // Prefer UAData
+    if (navigator.userAgentData) {
+      document.documentElement.classList.add(navigator.userAgentData.mobile ? 'device-mobile' : 'device-desktop');
+      return;
+    }
+    // Fallback: screen width + touch
+    const width = Math.max(window.innerWidth, screen.width);
+    const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+    if (isTouch && width < 768) document.documentElement.classList.add('device-mobile');
+    else if (isTouch && width < 1024) document.documentElement.classList.add('device-tablet');
+    else document.documentElement.classList.add('device-desktop');
+  }
+  deviceClass();
+  // update on resize
+  window.addEventListener('resize', () => {
+    document.documentElement.classList.remove('device-mobile','device-tablet','device-desktop');
+    deviceClass();
+  });
+</script>
