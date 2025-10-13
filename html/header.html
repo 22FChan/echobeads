@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/header.css" />
+<!-- header styles are included in merge.css -->
 
 <nav class="site-nav">
     <a class="brand" href="index.html"><img src="../pictures/logo_1.png" alt="EchoBeads" style="height:36px;"> <span>EchoBeads</span></a>
@@ -9,9 +9,9 @@
     </ul>
 
     <div style="position:relative">
-        <button id="cart-button" class="cart-btn" aria-expanded="false" aria-haspopup="true" title="Open cart">
+        <button id="cart-button" class="cart-btn" aria-expanded="false" aria-haspopup="true" title="Open cart" aria-controls="cart-dropdown" tabindex="0">
             🛒 Cart
-            <span id="cart-count" class="cart-count" aria-hidden="false">0</span>
+            <span id="cart-count" class="cart-count" aria-live="polite">0</span>
         </button>
 
         <div id="cart-dropdown" class="cart-dropdown" role="dialog" aria-label="Shopping cart">
@@ -28,6 +28,9 @@
     // Simple cart stored in localStorage under key 'echobeads_cart'
     (function(){
         const KEY = 'echobeads_cart';
+
+        // create toast container
+        const toast = document.createElement('div'); toast.className='toast'; toast.id='site-toast'; toast.textContent=''; document.body.appendChild(toast);
 
         function getCart(){
             try{ return JSON.parse(localStorage.getItem(KEY) || '[]') }catch(e){ return [] }
@@ -64,6 +67,8 @@
             else cart.push(Object.assign({qty:1}, item));
             saveCart(cart);
             renderDropdown();
+            // show toast
+            const t = document.getElementById('site-toast'); if(t){ t.textContent = `${item.name} added to cart`; t.classList.add('show'); setTimeout(()=> t.classList.remove('show'),1600); }
         }
 
         window.removeFromCart = function(id){
@@ -87,6 +92,21 @@
                 btn.setAttribute('aria-expanded','false');
             }
         });
+
+        // keyboard toggle for cart (Enter/Space)
+        document.getElementById('cart-button').addEventListener('keydown', function(e){
+            if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); this.click(); }
+        });
+
+        // highlight active nav link
+        (function highlightActive(){
+            try{
+                const path = location.pathname.split('/').pop() || 'index.html';
+                document.querySelectorAll('.site-nav a').forEach(a=>{
+                    if(a.getAttribute('href') === path) a.style.textDecoration='underline';
+                });
+            }catch(e){}
+        })();
 
         document.getElementById('clear-cart').addEventListener('click', function(){ localStorage.removeItem(KEY); renderDropdown(); updateBadge(); });
 

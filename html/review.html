@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EchoBeads | Review</title>
+    <meta name="description" content="Leave feedback for EchoBeads" />
+    <meta property="og:title" content="EchoBeads - Review" />
+    <meta property="og:description" content="Share your experience with EchoBeads" />
     <link rel="stylesheet" href="../css/merge.css">
     <link rel="stylesheet" href="../css/review.css">
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <script>
       fetch("header.html")
         .then((response) => response.text())
@@ -17,7 +21,7 @@
         });
     </script>
 <div class="page-center">
-    <main class="main-container rating-hero">
+    <main id="main-content" class="main-container rating-hero">
         <h1>Rate Your Experience</h1>
         <form class="review-form" action="/submit-review" method="post">
                 <div class="rating-box">

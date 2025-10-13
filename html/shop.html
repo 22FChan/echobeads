@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>EchoBeads | Shop</title>
+  <meta name="description" content="Shop EchoBeads - browse our handmade beads and jewelry" />
+  <meta property="og:title" content="EchoBeads - Shop" />
+  <meta property="og:description" content="Browse and buy handmade beads and jewelry at EchoBeads" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../css/merge.css" />
   <link rel="stylesheet" href="../css/shop.css" />
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
     <script>
       fetch("header.html")
         .then((response) => response.text())
@@ -17,7 +21,7 @@
         });
     </script>
 
-    <div class="shop-container">
+  <div id="main-content" class="shop-container">
         <div class="product-grid">
             <article class="product-card">
                 <img class="product-image" src="../pictures/bracelet.svg" alt="Glass Bracelet">

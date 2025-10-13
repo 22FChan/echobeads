@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EchoBeads | Cart</title>
+  <meta name="description" content="Your shopping cart at EchoBeads" />
+  <meta property="og:title" content="EchoBeads - Cart" />
+  <meta property="og:description" content="Review and checkout items in your EchoBeads cart" />
   <link rel="stylesheet" href="../css/merge.css" />
   <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
   <style>
@@ -19,11 +22,12 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <script>
     fetch('header.html').then(r=>r.text()).then(t=>document.body.insertAdjacentHTML('afterbegin', t));
   </script>
 
-  <div class="container">
+  <div id="main-content" class="container">
     <h1>Your Cart</h1>
     <div id="cart-root">
       <p class="muted">Loading cart...</p>
