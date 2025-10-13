@@ -1,24 +1,104 @@
-<!-- Import header -->
-<!--#include file="header.html" -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EchoBeads | Review</title>
-    <link rel="stylesheet" href="../css/review.css">
-    <link rel="stylesheet" href="../css/merge.css" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EchoBeads | Home</title>
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
+  </head>
+  <body>
+    
+
+    <style>
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color:beige ; 
+            background-size: cover;
+            background-position: center;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(202, 46, 46);
+        }
+
+        .header-buttons li {
+            margin: 0 15px;
+        }
+
+        h1 {
+            font-size: 3em;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+        /* Footer */
+
+        html, body{
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-image: url('../pictures/bracelet_mades_out_of_charms_a.jpeg'); /* change path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .content {
+            flex: 1; /* This pushes the footer to the bottom if content is short */
+            padding: 150px;
+            background-color: rgba(222, 194, 194, 0.6); /* Optional: to improve readability */
+            font-size: 2em;
+        }   
+
+        main {
+            flex: 1; /* This pushes the footer to the bottom if content is short */
+        }
+
+        .footer {
+            background-color: beige;
+            text-align: center;
+            padding: 20px 0;
+            height: 20px;
+            width: 100%;
+            font-size: 1em;
+            color: #cc2121;
+        }
+    
+    </style>
 </head>
 <body>
-    <script>
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.body.insertAdjacentHTML("afterbegin", data);
-        });
-    </script>
-<main>
-    <h1>Rate Your Experience</h1>
-    <form action="/submit-review" method="post">
+    <header class="header-container" style="display: flex; justify-content: space-between; padding: 0 40px; align-items: center;">
+        <div style="display: flex; align-items: center;">
+            <img src="../pictures/logo_1.png" alt="EchoBeads Logo" style="height: 40px; margin-right: 20px;"><a href="index.html">
+            <span style="font-size: 3em; font-weight: bold; color: #333;" href="index.html">EchoBeads</span>
+        </div>
+
+
+        <dig style="display: flex; align-items: center;">
+            <nav>
+                <ul class="header-buttons" style="display: flex; list-style: none; margin: 0; padding: 0;">
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="index.html" style="text-decoration: none; color: #333;">Home</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="review.html" style="text-decoration: none; color: #333;">Review</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="shop.html" style="text-decoration: none; color: #333;">Shop</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="content.html" style="text-decoration: none; color: #333;">Content</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html" style="display: flex; align-items: center; text-decoration: none; color: #333;">
+                <img src="cart.png" alt="Shopping Cart" style="height: 32px;">
+            </a>
+        </dig>
+    </header>
+    <main>
+    <div class="content">
+    <h2>Rate Your Experience</h2>
+    <form action="/submit-review" method="post">    
         <label for="rating">How would you rate us?</label>
         <select id="rating" name="rating" required>
             <option value="">Select</option>
@@ -34,14 +114,17 @@
         <br><br>
         <button type="submit">Submit Review</button>
     </form>
-</main>
-<script>
-    fetch("footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.body.insertAdjacentHTML("beforeend", data);
-    });
+    </div>
+    </main>
+    <!--Footer-->
+    
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> EchoBeads. All rights reserved.</p>
+    </footer>
+
+    <script class="footer">
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
-<!-- Import footer -->
-<!--#include file="footer.html" -->
+</html>
