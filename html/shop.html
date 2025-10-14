@@ -1,13 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shop - Purchase Options</title>
+<html>
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EchoBeads | Home</title>
-    <link rel="stylesheet" href="../css/shop.css" />
-    <link rel="stylesheet" href="../css/merge.css" />
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
+  </head>
+  <body>
+    
+        <!-- Anti-Copying -->
+    <script>
+      document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+      });
+    </script>
+    
+
+    <style>
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color:beige ; 
+            background-size: cover;
+            background-position: center;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(202, 46, 46);
+        }
+
+        .header-buttons li {
+            margin: 0 15px;
+        }
+
+        h1 {
+            font-size: 3em;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+        /* Footer */
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-image: url('../pictures/painterly_anime_artwork_painte.jpeg'); /* change path */
+            background-size: 100%;
+            background-position: middle;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        main {
+            flex: 1; /* This pushes the footer to the bottom if content is short */
+        }
+
+        .footer {
+            background-color: beige;
+            text-align: center;
+            padding: 20px 0;
+            height: 20px;
+            width: 100%;
+            font-size: 1em;
+            color: #cc2121;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Shop</h1>
