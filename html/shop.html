@@ -7,13 +7,6 @@
   </head>
   <body>
     
-        <!-- Anti-Copying -->
-    <script>
-      document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-      });
-    </script>
-    
 
     <style>
         .header-container {
@@ -52,13 +45,20 @@
             flex-direction: column;
             background-image: url('../pictures/painterly_anime_artwork_painte.jpeg'); /* change path */
             background-size: 100%;
-            background-position: middle;
+            background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
 
         main {
             flex: 1; /* This pushes the footer to the bottom if content is short */
+        }
+
+        .content {
+            flex: 1; /* This pushes the footer to the bottom if content is short */
+            padding: 150px;
+            background-color: rgba(222, 194, 194, 0.6); /* Optional: to improve readability */
+            font-size: 1.75em;
         }
 
         .footer {
@@ -74,8 +74,29 @@
     </style>
 </head>
 <body>
-    <h1>Shop</h1>
-    <h2>Purchase Options</h2>
+    <header class="header-container" style="display: flex; justify-content: space-between; padding: 0 40px; align-items: center;">
+        <div style="display: flex; align-items: center;">
+            <img src="../pictures/logo_1.png" alt="EchoBeads Logo" style="height: 40px; margin-right: 20px;"><a href="../index.html">
+            <span style="font-size: 3em; font-weight: bold; color: #333;" href="../index.html">EchoBeads</span>
+        </div>
+
+
+        <dig style="display: flex; align-items: center;">
+            <nav>
+                <ul class="header-buttons" style="display: flex; list-style: none; margin: 0; padding: 0;">
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="../index.html" style="text-decoration: none; color: #333;">Home</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="review.html" style="text-decoration: none; color: #333;">Review</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="shop.html" style="text-decoration: none; color: #333;">Shop</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="content.html" style="text-decoration: none; color: #333;">Content</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html" style="display: flex; align-items: center; text-decoration: none; color: #333;">
+                <img src="cart.png" alt="Shopping Cart" style="height: 32px;">
+            </a>
+        </dig>
+    </header>
+    <div class="content">
+        <h2>Purchase Options</h2>
     <form action="/purchase" method="post">
         <fieldset>
             <legend>Select an item:</legend>
@@ -109,5 +130,16 @@
         </fieldset>
         <button type="submit">Purchase</button>
     </form>
-</body>
+    </div>
+    <!--Footer-->
+    
+
+    <footer class="footer">
+      <p>&copy; <span id="year"></span> EchoBeads. All rights reserved.</p>
+    </footer>
+
+    <script class="footer">
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
