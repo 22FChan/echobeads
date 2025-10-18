@@ -1,115 +1,159 @@
 <!DOCTYPE html>
-<html>
-  <body>  
-    <style>
-.menu-toggle {
-  font-size: 2em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #cc2121;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1001;
-}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sidebar Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Basic reset and styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
 
-/* Sidebar styles */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Hidden by default */
-  width: 250px;
-  height: 100vh;
-  background-color: beige;
-  padding: 20px;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-  z-index: 1002;
-  transition: left 0.3s ease;
-  box-sizing: border-box;
-}
+    /* Toggle button */
+    .menu-toggle {
+      font-size: 2em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #cc2121;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+    }
 
-.sidebar.open {
-  left: 0;
-}
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: beige;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+      z-index: 1002;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      box-sizing: border-box;
+    }
 
-/* Sidebar links */
-.sidebar h2 {
-  margin-top: 0;
-  color: #cc2121;
-}
+    .sidebar.open {
+      transform: translateX(0);
+    }
 
-.sidebar a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  margin: 15px 0;
-  font-size: 1.2em;
-}
+    /* Sidebar content */
+    .sidebar h2 {
+      margin-top: 0;
+      color: #cc2121;
+    }
 
-.sidebar a:hover {
-  color: #cc2121;
-}
+    .sidebar a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      margin: 15px 0;
+      font-size: 1.2em;
+    }
 
-/* Close button inside sidebar */
-.close-btn {
-  font-size: 1.5em;
-  background: none;
-  border: none;
-  float: right;
-  cursor: pointer;
-  margin-top: -10px;
-  color: #cc2121;
-}
+    .sidebar a:hover {
+      color: #cc2121;
+    }
 
-/* Overlay */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-}
+    /* Close button */
+    .close-btn {
+      font-size: 1.5em;
+      background: none;
+      border: none;
+      float: right;
+      cursor: pointer;
+      margin-top: -10px;
+      color: #cc2121;
+    }
 
-.overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
 
-</style>
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
 </head>
 <body>
-    <!-- Sidebar toggle button in header -->
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-  <!-- Overlay background -->
+  <!-- Toggle button -->
+  <button
+    class="menu-toggle"
+    onclick="toggleSidebar()"
+    aria-label="Open menu"
+    aria-controls="sidebar"
+    aria-expanded="false"
+  >
+    ☰
+  </button>
+
+  <!-- Overlay -->
   <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
-  <!-- Sidebar -->
-  <div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="closeSidebar()">✖</button>
+  <!-- Sidebar (semantic nav) -->
+  <nav id="sidebar" class="sidebar" aria-label="Sidebar navigation">
+    <button class="close-btn" onclick="closeSidebar()" aria-label="Close menu">✖</button>
     <h2>Menu</h2>
-    <a href="#">Home</a>
-    <a href="#">Shop</a>
+    <a href="../index.html">Home</a>
+    <a href="#"></a>
     <a href="#">Cart</a>
     <a href="#">Contact</a>
-  </div>
-    <script>
-      function toggleSidebar() {
-        document.getElementById("sidebar").classList.add("open");
-        document.getElementById("overlay").classList.add("show");
+  </nav>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const toggleButton = document.querySelector(".menu-toggle");
+
+      sidebar.classList.add("open");
+      overlay.classList.add("show");
+      document.body.style.overflow = "hidden";
+      toggleButton.setAttribute("aria-expanded", "true");
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const toggleButton = document.querySelector(".menu-toggle");
+
+      sidebar.classList.remove("open");
+      overlay.classList.remove("show");
+      document.body.style.overflow = "";
+      toggleButton.setAttribute("aria-expanded", "false");
+    }
+
+    // Close sidebar on Escape key
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeSidebar();
       }
+    });
 
-      function closeSidebar() {
-        document.getElementById("sidebar").classList.remove("open");
-        document.getElementById("overlay").classList.remove("show");
-     }
-    </script>
+    // Auto-close when a sidebar link is clicked
+    document.querySelectorAll(".sidebar a").forEach(link => {
+      link.addEventListener("click", closeSidebar);
+    });
+  </script>
 
-  </body>
+</body>
 </html>
