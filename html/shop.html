@@ -60,9 +60,79 @@
             background-color: rgba(222, 194, 194, 0.6); /* Optional: to improve readability */
             font-size: 1.75em;
         }
+        
+        /* Container grid */
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive */
+          gap: 20px;
+          padding: 40px;
+          max-width: 1200px;
+          margin: auto;
+        }
+
+        /* Each product box */
+        .product-box {
+          background-color: #f5f5dc;
+          border: 1px solid #ccc;
+          border-radius: 12px;
+          padding: 20px;
+          text-align: center;
+          box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+          transition: transform 0.1s;
+        }   
+
+        .product-box:hover {
+          transform: scale(1.03);
+        }
+
+        /* Image inside the box */
+        .product-box img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+
+        /* Title and price */
+        .product-box h3 {
+          margin: 10px 0;
+          font-size: 1.2em;
+          color: #333;
+        }
+
+        .product-box p {
+          color: #cc2121;
+          font-weight: bold;
+          font-size: 1.1em;
+        }
+
+        /* Button */
+        .product-box button {
+          background-color: #cc2121;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          margin-top: 10px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 1em;
+        }
+
+        .product-box button:hover {
+          background-color: #a81b1b;
+        }
+
+
+
+
+
+
+
+
+
 
         .footer {
-            background-color: beige;
+            background-color: rgb(245, 245, 220);
             text-align: center;
             padding: 20px 0;
             height: 20px;
@@ -97,39 +167,37 @@
     </header>
     <div class="content">
         <h2>Purchase Options</h2>
-    <form action="/purchase" method="post">
-        <fieldset>
-            <legend>Select an item:</legend>
-            <label>
-                <input type="radio" name="item" value="bracelet">
-                Bracelet - $10
-            </label><br>
-            <label>
-                <input type="radio" name="item" value="necklace">
-                Necklace - $15
-            </label><br>
-            <label>
-                <input type="radio" name="item" value="earrings">
-                Earrings - $8
-            </label>
-        </fieldset>
-        <fieldset>
-            <legend>Quantity:</legend>
-            <input type="number" name="quantity" min="1" value="1">
-        </fieldset>
-        <fieldset>
-            <legend>Payment Method:</legend>
-            <label>
-                <input type="radio" name="payment" value="credit_card">
-                Credit Card
-            </label><br>
-            <label>
-                <input type="radio" name="payment" value="paypal">
-                PayPal
-            </label>
-        </fieldset>
-        <button type="submit">Purchase</button>
-    </form>
+
+        <div class="product-grid">
+          <div class="product-box">
+            <img src="product1.jpg" alt="Product 1">
+            <h3>Loomband Bracelet</h3>
+            <p>£0.50</p>
+            <button>Add to Cart</button>
+          </div>
+  
+          <div class="product-box">
+            <img src="product2.jpg" alt="Product 2">
+            <h3>Loomband Bracelet (With Charms)</h3>
+            <p>£1.00</p>
+            <button>Add to Cart</button>
+          </div>
+          
+           <div class="product-box">
+            <img src="bracelet.jpg" alt="Product 3">
+            <h3>Bracelet</h3>
+            <p>£0.50</p>
+            <button onclick="location.href='html/items/bracelet.html'">Add to Cart</button>
+          </div>
+
+            <div class="product-box">
+                <img src="product4.jpg" alt="Product 4">
+                <h3>Bracelet (With Charms)</h3>
+                <p>£1.00</p>
+                <button>Add to Cart</button>
+            </div> 
+        </div>
+
     </div>
     <!--Footer-->
     
