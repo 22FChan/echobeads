@@ -28,11 +28,15 @@
             justify-content: center;
             width: 100%;
             box-sizing: border-box;
+            font-size: 100%;
         }
 
-        .header-buttons li {
-            margin: 0 2vw;
+        a:link,
+        a:visited {
+        color: black;
+        text-decoration: none; /* optional: removes underline */
         }
+
 
         html, body {
             height: 100%;
@@ -54,8 +58,9 @@
             padding: 50px;
             background-color: rgba(222, 194, 194, 0.6);
             font-size: 150%;
-            max-width: 95%;
-            margin: 120px auto 0 auto;
+            width: 90%;
+            max-width: 1200px;
+            margin: 110px auto 0 auto;
             border-radius: 12px;
             box-sizing: border-box;
         }
@@ -113,15 +118,15 @@
 <body>
     <header class="header-container" style="display: flex; justify-content: space-between; padding: 0 40px; align-items: center;">
         <div style="display: flex; align-items: center;">
-            <img src="../pictures/logo_1.png" alt="EchoBeads Logo" style="height: 40px; margin-right: 20px;"><a href="index.html">
-            <span style="font-size: 3em; font-weight: bold; color: #333;" href="index.html">EchoBeads</span>
+            <img src="../pictures/logo_2.png" alt="EchoBeads Logo" style="height: 40px; margin-right: 20px;">
+            <span style="font-size: 250%; font-weight: bold; color: #333;"><a href="../">EchoBeads</span>
         </div>
 
 
         <dig style="display: flex; align-items: center;">
             <nav>
                 <ul class="header-buttons" style="display: flex; list-style: none; margin: 0; padding: 0;">
-                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="index.html" style="text-decoration: none; color: #333;">Home</a></li>
+                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="../" style="text-decoration: none; color: #333;">Home</a></li>
                     <li style="margin: 0 30px; font-size: 1.5em;"><a href="review.html" style="text-decoration: none; color: #333;">Review</a></li>
                     <li style="margin: 0 30px; font-size: 1.5em;"><a href="shop.html" style="text-decoration: none; color: #333;">Shop</a></li>
                     <li style="margin: 0 30px; font-size: 1.5em;"><a href="content.html" style="text-decoration: none; color: #333;">Content</a></li>
