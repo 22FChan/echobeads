@@ -4,6 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EchoBeads | Home</title>
     <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
+    <script>
+        const width1= window.innerWidth;
+        const height1 = window.innerHeight;
+    </script>
   </head>
   <body>
     
@@ -15,50 +19,49 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background-color:beige ; 
+            background-color: beige;
             background-size: cover;
             background-position: center;
             height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgb(202, 46, 46);
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .header-buttons li {
-            margin: 0 15px;
+            margin: 0 2vw;
         }
 
-        h1 {
-            font-size: 3em;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        
-        /* Footer */
-
-        html, body{
+        html, body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
-            background-image: url('../pictures/bracelet_mades_out_of_charms_a.jpeg'); /* change path */
+            background-image: url('../pictures/bracelet_mades_out_of_charms_a.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            min-height: 100vh;
+            width: 100vw;
+            box-sizing: border-box;
         }
 
         .content {
-            flex: 1; /* This pushes the footer to the bottom if content is short */
-            padding: 150px;
-            background-color: rgba(222, 194, 194, 0.6); /* Optional: to improve readability */
-            font-size: 2em;
-        }   
+            flex: 1;
+            padding: 50px;
+            background-color: rgba(222, 194, 194, 0.6);
+            font-size: 150%;
+            max-width: 95%;
+            margin: 120px auto 0 auto;
+            border-radius: 12px;
+            box-sizing: border-box;
+        }
 
         main {
-            flex: 1; /* This pushes the footer to the bottom if content is short */
+            flex: 1;
         }
 
         .footer {
@@ -66,11 +69,45 @@
             text-align: center;
             padding: 20px 0;
             height: 20px;
-            width: 100%;
+            width: 100vw;
             font-size: 1em;
             color: #cc2121;
+            position: relative;
+            bottom: 0;
         }
-    
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10%;
+        }
+
+        label, select, textarea, button {
+            font-size: 1em;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        select, textarea {
+            padding: 0.5em;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            background-color: #cc2121;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7em 0;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 0.5em;
+        }
+        button[type="submit"]:hover {
+            background-color: #a81b1b;
+        }
     </style>
 </head>
 <body>
@@ -97,7 +134,7 @@
     </header>
     <main>
     <div class="content">
-    <h2>Rate Your Experience</h2>
+    <h2 style="font-size: 200%;">Rate Your Experience</h2>
     <form action="/submit-review" method="post">    
         <label for="rating">How would you rate us?</label>
         <select id="rating" name="rating" required>
