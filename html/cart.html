@@ -1,92 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EchoBeads | Cart</title>
-  <meta name="description" content="Your shopping cart at EchoBeads" />
-  <meta property="og:title" content="EchoBeads - Cart" />
-  <meta property="og:description" content="Review and checkout items in your EchoBeads cart" />
-  <link rel="stylesheet" href="../css/merge.css" />
-  <link rel="icon" href="../pictures/logo_1.png" type="image/png" />
-  <style>
-    body{font-family:Segoe UI, Arial, sans-serif; background:#f8fafc; margin:0; padding:0}
-    .container{max-width:1000px; margin:32px auto; padding:20px}
-    .cart-table{width:100%; border-collapse:collapse}
-    .cart-table th, .cart-table td{padding:12px; text-align:left; border-bottom:1px solid #eee}
-    .cart-item-img{width:70px; height:70px; object-fit:cover; border-radius:8px}
-    .qty-input{width:64px}
-    .totals{margin-top:20px; text-align:right; font-weight:700}
-    .btn{background:#4f46e5;color:#fff;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
-    .muted{color:#666}
-  </style>
-  <style>
-    /* Inline fallback core styles (applies if merge.css didn't load) */
-    .site-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;border-bottom:1px solid #eee}
-    .site-nav .brand{display:flex;align-items:center;gap:8px;font-weight:700}
-    .site-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:14px}
-    .site-nav a{color:#111}
-    .cart-count{background:#ef4444;color:#fff;border-radius:999px;padding:2px 8px;margin-left:8px;font-weight:700}
-    .cart-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);opacity:0;pointer-events:none}
-    .cart-drawer{position:fixed;right:0;top:0;height:100vh;width:360px;background:#fff;transform:translateX(110%);}
-    .cart-drawer.open{transform:translateX(0)}
-    .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;opacity:0}
-  </style>
+<html>
+  <body>  
+    <style>
+.menu-toggle {
+  font-size: 2em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #cc2121;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden by default */
+  width: 250px;
+  height: 100vh;
+  background-color: beige;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+  z-index: 1002;
+  transition: left 0.3s ease;
+  box-sizing: border-box;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* Sidebar links */
+.sidebar h2 {
+  margin-top: 0;
+  color: #cc2121;
+}
+
+.sidebar a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin: 15px 0;
+  font-size: 1.2em;
+}
+
+.sidebar a:hover {
+  color: #cc2121;
+}
+
+/* Close button inside sidebar */
+.close-btn {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  float: right;
+  cursor: pointer;
+  margin-top: -10px;
+  color: #cc2121;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <script>
-    fetch('header.html').then(r=>r.text()).then(t=>document.body.insertAdjacentHTML('afterbegin', t));
-  </script>
+    <!-- Sidebar toggle button in header -->
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-  <div id="main-content" class="container">
-    <h1>Your Cart</h1>
-    <div id="cart-root">
-      <p class="muted">Loading cart...</p>
-    </div>
+  <!-- Overlay background -->
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">✖</button>
+    <h2>Menu</h2>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Cart</a>
+    <a href="#">Contact</a>
   </div>
-
-  <script>
-    (function(){
-      const KEY = 'echobeads_cart';
-      function getCart(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]') }catch(e){return[]} }
-      function saveCart(c){ localStorage.setItem(KEY, JSON.stringify(c)); window.dispatchEvent(new Event('storage')); render(); }
-
-  function format(n){ return '£'+n.toFixed(2) }
-
-      function render(){
-        const root = document.getElementById('cart-root');
-        const cart = getCart();
-        if(!cart.length){ root.innerHTML = '<p>Your cart is empty. <a href="shop.html">Go shopping</a></p>'; return }
-        let html = '<table class="cart-table"><thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead><tbody>';
-        cart.forEach((it, idx)=>{
-          html += `<tr data-idx="${idx}"><td><div style="display:flex;gap:12px;align-items:center"><img class=\"cart-item-img\" src=\"${it.image||'../pictures/logo_1.png'}\" alt=\"${it.name}\"><div>${it.name}</div></div></td><td>${format(it.price)}</td><td><input class=\"qty-input\" type=\"number\" min=\"1\" value=\"${it.qty}\" data-idx=\"${idx}\"></td><td>${format(it.price*it.qty)}</td><td><button class=\"btn remove\" data-idx=\"${idx}\">Remove</button></td></tr>`;
-        });
-        html += '</tbody></table>';
-        const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
-        html += `<div class="totals">Total: ${format(total)}</div><div style="text-align:right;margin-top:10px"><button id=\"checkout\" class=\"btn\">Checkout</button></div>`;
-        root.innerHTML = html;
-
-        // attach listeners
-        root.querySelectorAll('.qty-input').forEach(inp=> inp.addEventListener('change', e=>{
-          const idx = Number(e.target.dataset.idx); const val = Math.max(1, Number(e.target.value)||1);
-          cart[idx].qty = val; saveCart(cart);
-        }));
-        root.querySelectorAll('.remove').forEach(btn=> btn.addEventListener('click', e=>{
-          const idx = Number(e.target.dataset.idx); cart.splice(idx,1); saveCart(cart);
-        }));
-  document.getElementById('checkout').addEventListener('click', function(){ alert('Checkout placeholder — integrate payment here'); localStorage.removeItem(KEY); window.dispatchEvent(new Event('storage')); render(); });
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.add("open");
+        document.getElementById("overlay").classList.add("show");
       }
 
-      // initial render
-      render();
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("overlay").classList.remove("show");
+     }
+    </script>
 
-    })();
-  </script>
-
-  <script>
-    // fetch footer after page
-    fetch('footer.html').then(r=>r.text()).then(t=>document.body.insertAdjacentHTML('beforeend', t));
-  </script>
-</body>
+  </body>
 </html>
