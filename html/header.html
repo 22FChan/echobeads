@@ -204,29 +204,29 @@
 </head>
 <body>
 
-  <header class="header-container">
-    <!-- Left: Menu + Logo -->
-    <div style="display: flex; align-items: center;">
-      <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
-      <img src="../pictures/logo_2.png" alt="EchoBeads Logo" style="height: 40px; padding-left: 40px; padding-right: 20px; ">
-      <a href="index.html" style="text-decoration: none;">
-        <span style="font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
-      </a>
-    </div>
+<!-- header.html -->
+<header class="header-container">
+  <div style="display: flex; align-items: center;">
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+    <img src="../pictures/logo_2.png" alt="Logo" style="height: 40px; padding-left: 40px; padding-right: 20px;">
+    <a href="index.html" style="text-decoration: none;">
+      <span style="font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
+    </a>
+  </div>
 
-    <!-- Right: Shopping Cart -->
-    <div class="cart-container" id="cartContainer">
-      <div class="cart-icon" id="cartIcon">
-        <img src="cart.png" alt="Shopping Cart">
-        <span class="cart-badge" aria-live="polite" aria-atomic="true">0</span>
-      </div>
-      <div class="cart-dropdown" id="cartDropdown">
-        <p class="empty">Your cart is empty.</p>
-        <ul class="cart-items"></ul>
-        <a href="cart.html" class="view-cart">View Full Cart</a>
-      </div>
+  <div class="cart-container" id="cartContainer">
+    <div class="cart-icon" id="cartIcon">
+      <img src="cart.png" alt="Cart">
+      <span class="cart-badge" aria-live="polite" aria-atomic="true">0</span>
     </div>
-  </header>
+    <div class="cart-dropdown" id="cartDropdown">
+      <p class="empty">Your cart is empty.</p>
+      <ul class="cart-items"></ul>
+      <a href="cart.html" class="view-cart">View Full Cart</a>
+    </div>
+  </div>
+</header>
+
 
   <!-- Overlay -->
   <div id="overlay" class="overlay" onclick="closeSidebar()"></div>

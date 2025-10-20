@@ -1,193 +1,330 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EchoBeads | Home</title>
-    <link rel="icon" href="pictures/logo_2.png" type="image/png" />
-  </head>
-  <body>
-    
-        <!-- Anti-Copying -->
-    <script>
-      document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-      });
-    </script>
-    
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EchoBeads | Home</title>
+  <link rel="icon" href="pictures/logo_2.png" type="image/png" />
 
-    <style>
-        .header-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background-color: beige;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+  <style>
+    /* --- GLOBAL RESET --- */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('pictures/painterly_anime_artwork_painte.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        h1 {
-            font-size: 3em;
-            margin-top: 100px;
-            padding: 20px 10%;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.4);
-            border-radius: 5px;
-            color: white;
-        }
-        
-        pre {
-            white-space: pre-wrap;
-            text-align: center;
-            font-size: 1.2em;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 5px;
-            line-height: 1.6;
-        }
+    /* --- HEADER --- */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 90px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: beige;
+      z-index: 1000;
+      box-sizing: border-box;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Footer */
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            background-image: url('pictures/painterly_anime_artwork_painte.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
+    .menu-toggle {
+      font-size: 2em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #cc2121;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+    }
 
-        main {
+    .menu-toggle:hover {
+      color: #7c0a0a;
+    }
 
-            padding-bottom: 60px;
-        }
+    /* --- SIDEBAR --- */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: beige;
+      padding: 20px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1002;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+    }
 
-        .footer {
-            background-color: beige;
-            text-align: center;
-            width: 100%;
-            font-size: 1.2em;
-            color: #000000;
-            padding: 15px 0;
-            margin-top: auto;
-        }
+    .sidebar.open {
+      transform: translateX(0);
+    }
 
-        /* Tablet Styles */
-        @media screen and (max-width: 1024px) {
-            .header-container {
-                padding: 0 20px;
-            }
+    .sidebar h2 {
+      margin-top: 0;
+      color: #cc2121;
+    }
 
-            .header-buttons li {
-                margin: 0 15px;
-                font-size: 1.2em;
-            }
+    .sidebar a {
+      display: block;
+      margin: 15px 0;
+      font-size: 1.2em;
+      text-decoration: none;
+      color: #333;
+    }
 
-            h1 {
-                font-size: 2.5em;
-                padding: 15px 5%;
-            }
+    .sidebar a:hover {
+      color: #cc2121;
+    }
 
-            pre {
-                font-size: 1.1em;
-                padding: 15px;
-                margin: 15px auto;
-                max-width: 90%;
-            }
-        }
+    .close-btn {
+      font-size: 1.5em;
+      background: none;
+      border: none;
+      float: right;
+      cursor: pointer;
+      color: #cc2121;
+      margin-top: -10px;
+    }
 
-        /* Mobile Styles */
-        @media screen and (max-width: 768px) {
-            .header-container {
-                padding: 0 10px;
-                height: auto;
-                flex-direction: column;
-                padding: 10px;
-            }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
 
-            .header-buttons {
-                flex-direction: column;
-                align-items: center;
-                margin-top: 10px;
-            }
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
 
-            .header-buttons li {
-                margin: 10px 0;
-                font-size: 1.1em;
-            }
+    /* --- CART --- */
+    .cart-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
 
-            h1 {
-                font-size: 2em;
-                margin-top: 140px;
-                padding: 10px 5%;
-            }
-        
-            
+    .cart-icon img {
+      height: 32px;
+    }
 
-            .footer {
-                font-size: 1em;
-                padding: 10px 0;
-            }
-        }
-    </style>
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #cc2121;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.8em;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .cart-dropdown {
+      position: absolute;
+      top: 42px;
+      right: 0;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      width: 250px;
+      padding: 10px;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1003;
+    }
+
+    .cart-dropdown.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .cart-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cart-items li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    .empty {
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    .view-cart {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+      color: #cc2121;
+    }
+
+    .view-cart:hover {
+      text-decoration: underline;
+    }
+
+    /* --- MAIN CONTENT --- */
+    main {
+      margin-top: 120px;
+      padding-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 100px;
+      padding: 20px 10%;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      color: white;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      text-align: center;
+      font-size: 1.2em;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+      line-height: 1.6;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background-color: beige;
+      text-align: center;
+      width: 100%;
+      font-size: 1.2em;
+      color: #000000;
+      padding: 15px 0;
+      margin-top: auto;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media screen and (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+      }
+      h1 {
+        font-size: 2em;
+        margin-top: 140px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header class="header-container" style="display: flex; justify-content: space-between; padding: 0 40px; align-items: center;">
-        <div style="display: flex; align-items: center;">
-          <img src="pictures/logo_2.png" alt="EchoBeads Logo" style="height: 40px; margin-right: 20px;"><a href="index.html">
-          <span style="font-size: 3em; font-weight: bold; color: #333;" href="index.html">EchoBeads</span>
-        </div>
+  <!-- Header -->
+  <header class="header-container">
+    <div style="display: flex; align-items: center;">
+      <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <img src="pictures/logo_2.png" alt="Logo" style="height: 40px; padding-left: 40px; padding-right: 20px;">
+      <a href="" style="text-decoration: none;">
+        <span style="font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
+      </a>
+    </div>
 
+    <div class="cart-container" id="cartContainer">
+      <div class="cart-icon" id="cartIcon">
+        <img src="../pictures/cart.png" alt="Cart">
+        <span class="cart-badge" aria-live="polite" aria-atomic="true">0</span>
+      </div>
+      <div class="cart-dropdown" id="cartDropdown">
+        <p class="empty">Your cart is empty.</p>
+        <ul class="cart-items"></ul>
+        <a href="html/cart.html" class="view-cart">View Full Cart</a>
+      </div>
+    </div>
+  </header>
 
-        <dig style="display: flex; align-items: center;">
-            <nav>
-                <ul class="header-buttons" style="display: flex; list-style: none; margin: 0; padding: 0;">
-                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="" style="text-decoration: none; color: #333;">Home</a></li>
-                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="html/review.html" style="text-decoration: none; color: #333;">Review</a></li>
-                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="html/shop.html" style="text-decoration: none; color: #333;">Shop</a></li>
-                    <li style="margin: 0 30px; font-size: 1.5em;"><a href="html/content.html" style="text-decoration: none; color: #333;">Content</a></li>
-                </ul>
-            </nav>
-            <a href="html/cart.html" style="display: flex; align-items: center; text-decoration: none; color: #333;">
-                <img src="pictures/" alt="Shopping Cart" style="height: 32px;">
-            </a>
-        </dig>
-    </header>
+  <!-- Sidebar -->
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
+  <nav id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">✖</button>
+    <h2>Menu</h2>
+    <a href="index.html">Home</a>
+    <a href="html/review.html">Review</a>
+    <a href="html/shop.html">Shop</a>
+    <a href="html/contact.html">Contact</a>
+  </nav>
 
-    
-    <main>
-      <h1>EchoBeads - Beads That Echo</h1>
-      <pre>Welcome to EchoBeads, your one-stop shop for all things beads!
+  <!-- Main Content -->
+  <main>
+    <h1>EchoBeads - Beads That Echo</h1>
+    <pre>Welcome to EchoBeads, your one-stop shop for all things beads!
 Here, you'll find a dazzling array of beads in every color, shape, and size imaginable.
 Whether you're a seasoned jewelry maker or just starting out, we've got the perfect beads to bring your creative visions to life.
-Our collection includes everything from classic glass beads to trendy acrylics, elegant pearls, and unique handmade designs.
-      </pre>
-    </main>
+Our collection includes everything from classic glass beads to trendy acrylics, elegant pearls, and unique handmade designs.</pre>
 
     <div class="content">
-        <button onclick="location.href='html/shop.html'" style="display: block; margin: 0 auto; padding: 15px 30px; font-size: 1.5em; background-color: #cc2121; color: white; border: none; border-radius: 6px; cursor: pointer;">Shop Now</button>
+      <button onclick="location.href='html/shop.html'" style="display: block; margin: 0 auto; padding: 15px 30px; font-size: 1.5em; background-color: #cc2121; color: white; border: none; border-radius: 6px; cursor: pointer;">Shop Now</button>
     </div>
-    
+  </main>
 
-    <!--Footer-->
-    
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> EchoBeads. All rights reserved.</p>
+  </footer>
 
-    <footer class="footer">
-      <p>&copy; <span id="year"></span> EchoBeads. All rights reserved.</p>
-    </footer>
+  <!-- Scripts -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <script class="footer">
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-  </body>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.add('open');
+      document.getElementById('overlay').classList.add('show');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+
+    // Toggle cart dropdown
+    const cartIcon = document.getElementById('cartIcon');
+    const cartDropdown = document.getElementById('cartDropdown');
+    cartIcon.addEventListener('click', () => {
+      cartDropdown.classList.toggle('show');
+    });
+  </script>
+</body>
 </html>
