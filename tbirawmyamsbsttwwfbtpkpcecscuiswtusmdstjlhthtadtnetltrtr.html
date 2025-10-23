@@ -52,8 +52,8 @@ function pickMissingCard() {
   availableCards = cardNames.filter(c => c !== missingCard);
 
   // Debug text
-//  document.getElementById("debug").innerText = "DEBUG: Missing card is " + missingCard;
-  //console.log("Missing card:", missingCard);
+  document.getElementById("debug").innerText = "DEBUG: Missing card is " + missingCard;
+  console.log("Missing card:", missingCard);
 }
 
 function showRandomCard() {
