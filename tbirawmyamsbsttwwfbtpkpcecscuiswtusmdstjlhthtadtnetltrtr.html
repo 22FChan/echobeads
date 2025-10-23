@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Find the Missing Card Game</title>
+<title>Rules? Not Today!</title>
 <style>
   body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
   img { width: 200px; height: auto; margin: 20px 0; }
   input { font-size: 16px; padding: 5px; width: 200px; }
   button { font-size: 16px; padding: 5px 10px; margin: 5px; }
+  #debug { color: red; font-weight: bold; margin-top: 10px; }
 </style>
 </head>
 <body>
 
-<h1>Find the Missing Card!</h1>
-<div id="timer">Time left: 01:00</div>
+<h1><div id="timer">Time left: 01:00</div></h1>
 <img id="card-image" src="" alt="Card">
 <br>
 <input type="text" id="guess" placeholder="Type missing card">
 <br>
 <button id="next-btn">Next Card</button>
 <button id="check-btn">Check Answer</button>
-
+<div id="debug"></div>
+<div>
+  <p>You have 1 minute to do something. But what is it?! It's your job to figure out. Afterall, this is a puzzle game.</p>
+</div>
 <script>
+// List of all card codes
 const cardNames = [
   "1c","2c","3c","4c","5c","6c","7c","8c","9c","10c","11c","12c","13c",
   "1d","2d","3d","4d","5d","6d","7d","8d","9d","10d","11d","12d","13d",
@@ -30,6 +34,7 @@ const cardNames = [
   "1s","2s","3s","4s","5s","6s","7s","8s","9s","10s","11s","12s","13s"
 ];
 
+// Game variables
 let missingCard = "";
 let availableCards = [];
 let currentCard = "";
@@ -45,12 +50,15 @@ function startGame() {
 function pickMissingCard() {
   missingCard = cardNames[Math.floor(Math.random() * cardNames.length)];
   availableCards = cardNames.filter(c => c !== missingCard);
-  console.log("Missing card:", missingCard); // debug
+
+  // Debug text
+//  document.getElementById("debug").innerText = "DEBUG: Missing card is " + missingCard;
+  //console.log("Missing card:", missingCard);
 }
 
 function showRandomCard() {
   currentCard = availableCards[Math.floor(Math.random() * availableCards.length)];
-  document.getElementById("card-image").src = `images/${currentCard}.png`;
+  document.getElementById("card-image").src = `images/${currentCard}.jpg`;
   document.getElementById("guess").value = "";
 }
 
@@ -69,8 +77,11 @@ document.getElementById("next-btn").addEventListener("click", showRandomCard);
 
 document.getElementById("check-btn").addEventListener("click", () => {
   const guess = document.getElementById("guess").value.trim().toLowerCase();
-  // Example mapping, you can expand like in Python
-  const correctAnswers = [missingCard, missingCard.replace(/([0-9]+)([cdhs])/,'$1 of $2')];
+  const correctAnswers = [
+    missingCard,
+    missingCard.replace(/([0-9]+)([cdhs])/,'$1 of $2') // simple "10 of c" format
+  ];
+
   if(correctAnswers.includes(guess)) {
     alert("Correct!");
     pickMissingCard();
