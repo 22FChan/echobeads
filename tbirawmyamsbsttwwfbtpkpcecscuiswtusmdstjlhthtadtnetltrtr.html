@@ -52,8 +52,8 @@ function pickMissingCard() {
   availableCards = cardNames.filter(c => c !== missingCard);
 
   // Debug text
-  document.getElementById("debug").innerText = "DEBUG: Missing card is " + missingCard;
-  console.log("Missing card:", missingCard);
+//  document.getElementById("debug").innerText = "DEBUG: Missing card is " + missingCard;
+//  console.log("Missing card:", missingCard);
 }
 
 function showRandomCard() {
@@ -83,12 +83,12 @@ document.getElementById("check-btn").addEventListener("click", () => {
   ];
 
   if(correctAnswers.includes(guess)) {
-    alert("Correct!");
+    alert("Hmm! Isn't this a ID of some kind? c2826420-1c6e-4e51-a4fb-a62c1c5351c8");
     pickMissingCard();
     timeLeft = 60;
     showRandomCard();
   } else {
-    alert("Wrong! Resetting progress...");
+    alert("Wrong! Resetting all your progress! ");
     pickMissingCard();
     timeLeft = 60;
     showRandomCard();
