@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find the Missing Card Game</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+  img { width: 200px; height: auto; margin: 20px 0; }
+  input { font-size: 16px; padding: 5px; width: 200px; }
+  button { font-size: 16px; padding: 5px 10px; margin: 5px; }
+</style>
+</head>
+<body>
+
+<h1>Find the Missing Card!</h1>
+<div id="timer">Time left: 01:00</div>
+<img id="card-image" src="" alt="Card">
+<br>
+<input type="text" id="guess" placeholder="Type missing card">
+<br>
+<button id="next-btn">Next Card</button>
+<button id="check-btn">Check Answer</button>
+
+<script>
+const cardNames = [
+  "1c","2c","3c","4c","5c","6c","7c","8c","9c","10c","11c","12c","13c",
+  "1d","2d","3d","4d","5d","6d","7d","8d","9d","10d","11d","12d","13d",
+  "1h","2h","3h","4h","5h","6h","7h","8h","9h","10h","11h","12h","13h",
+  "1s","2s","3s","4s","5s","6s","7s","8s","9s","10s","11s","12s","13s"
+];
+
+let missingCard = "";
+let availableCards = [];
+let currentCard = "";
+let timeLeft = 60; // seconds
+let timerInterval;
+
+function startGame() {
+  pickMissingCard();
+  showRandomCard();
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+function pickMissingCard() {
+  missingCard = cardNames[Math.floor(Math.random() * cardNames.length)];
+  availableCards = cardNames.filter(c => c !== missingCard);
+  console.log("Missing card:", missingCard); // debug
+}
+
+function showRandomCard() {
+  currentCard = availableCards[Math.floor(Math.random() * availableCards.length)];
+  document.getElementById("card-image").src = `images/${currentCard}.png`;
+  document.getElementById("guess").value = "";
+}
+
+function updateTimer() {
+  if(timeLeft <= 0){
+    pickMissingCard();
+    timeLeft = 60;
+  }
+  const mins = Math.floor(timeLeft / 60).toString().padStart(2,'0');
+  const secs = (timeLeft % 60).toString().padStart(2,'0');
+  document.getElementById("timer").innerText = `Time left: ${mins}:${secs}`;
+  timeLeft--;
+}
+
+document.getElementById("next-btn").addEventListener("click", showRandomCard);
+
+document.getElementById("check-btn").addEventListener("click", () => {
+  const guess = document.getElementById("guess").value.trim().toLowerCase();
+  // Example mapping, you can expand like in Python
+  const correctAnswers = [missingCard, missingCard.replace(/([0-9]+)([cdhs])/,'$1 of $2')];
+  if(correctAnswers.includes(guess)) {
+    alert("Correct!");
+    pickMissingCard();
+    timeLeft = 60;
+    showRandomCard();
+  } else {
+    alert("Wrong! Resetting progress...");
+    pickMissingCard();
+    timeLeft = 60;
+    showRandomCard();
+  }
+});
+
+// Enter key also checks answer
+document.getElementById("guess").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){
+    document.getElementById("check-btn").click();
+  }
+});
+
+startGame();
+</script>
+
+</body>
+</html>
