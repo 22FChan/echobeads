@@ -7,8 +7,7 @@
   <link rel="icon" href="pictures/logo_2.png" type="image/png" />
 
   <style>
-    /* --- GLOBAL RESET --- */
-    body {
+     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-image: url('pictures/painterly_anime_artwork_painte.jpeg');
@@ -35,7 +34,7 @@
       background-color: beige;
       z-index: 1000;
       box-sizing: border-box;
-      box-shadow: 0px 0px 10px 0px black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .menu-toggle {
@@ -158,7 +157,6 @@
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
       z-index: 1003;
-      border-radius: 5px;
     }
 
     .cart-dropdown.show {
@@ -200,7 +198,7 @@
 
     /* --- MAIN CONTENT --- */
     main {
-      margin-top: 10px;
+      margin-top: 120px;
       padding-bottom: 60px;
     }
 
@@ -252,26 +250,26 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Header -->
   <header class="header-container">
     <div style="display: flex; align-items: center;">
       <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <img src="../../pictures/logo_2.png" alt="Logo" style="height: 40px; padding-left: 40px; padding-right: 20px;">
       <a href="" style="text-decoration: none;">
-        <span style="margin-left: 20%; font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
+        <span style="font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
       </a>
     </div>
 
     <div class="cart-container" id="cartContainer">
       <div class="cart-icon" id="cartIcon">
-        <img src="pictures/shopping_cart.png" alt="Cart">
+        <img src="../../pictures/shopping_cart.png" alt="Cart">
         <span class="cart-badge" aria-live="polite" aria-atomic="true">0</span>
       </div>
       <div class="cart-dropdown" id="cartDropdown">
         <p class="empty">Your cart is empty.</p>
         <ul class="cart-items"></ul>
-        <a href="html/cart.html" class="view-cart">View Full Cart</a>
+        <a href="../cart.html" class="view-cart">View Full Cart</a>
       </div>
     </div>
   </header>
@@ -288,25 +286,8 @@
     <a href="html/contact.html">Contact</a>
   </nav>
 
-  <!-- Main Content -->
-  <main>
-    <h1>EchoBeads - Beads That Echo</h1>
-    <pre>Welcome to EchoBeads, your one-stop shop for all things beads!
-Here, you'll find a dazzling array of beads in every color, shape, and size imaginable.
-Whether you're a seasoned jewelry maker or just starting out, we've got the perfect beads to bring your creative visions to life.
-Our collection includes everything from classic glass beads to trendy acrylics, elegant pearls, and unique handmade designs.</pre>
 
-    <div class="content">
-      <button onclick="location.href='html/shop.html'" style="display: block; margin: 0 auto; padding: 15px 30px; font-size: 1.5em; background-color: #cc2121; color: white; border: none; border-radius: 6px; cursor: pointer;">Shop Now</button>
-    </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> EchoBeads.</p>
-  </footer>
-
-  <!-- Scripts -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -327,5 +308,6 @@ Our collection includes everything from classic glass beads to trendy acrylics, 
       cartDropdown.classList.toggle('show');
     });
   </script>
+
 </body>
 </html>

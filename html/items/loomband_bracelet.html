@@ -7,8 +7,7 @@
   <link rel="icon" href="pictures/logo_2.png" type="image/png" />
 
   <style>
-    /* --- GLOBAL RESET --- */
-    body {
+     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-image: url('pictures/painterly_anime_artwork_painte.jpeg');
@@ -158,7 +157,6 @@
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
       z-index: 1003;
-      border-radius: 5px;
     }
 
     .cart-dropdown.show {
@@ -200,31 +198,30 @@
 
     /* --- MAIN CONTENT --- */
     main {
-      margin-top: 10px;
+      margin-top: 120px;
       padding-bottom: 60px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      color: white;
+      box-shadow: 3px 3px 10px 0px black;
     }
 
     h1 {
       font-size: 3em;
-      margin-top: 100px;
+      margin-top: 0px;
       padding: 20px 10%;
-      text-align: center;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 5px;
-      color: white;
+
     }
 
     pre {
       white-space: pre-wrap;
-      text-align: center;
       font-size: 1.2em;
-      padding: 20px;
-      margin: 20px auto;
+      margin: 20px 10%;
       max-width: 800px;
       background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 5px;
       line-height: 1.6;
-    }
+      color: black      
+    } 
 
     /* --- FOOTER --- */
     .footer {
@@ -233,7 +230,7 @@
       width: 100%;
       font-size: 1.2em;
       color: #000000;
-      padding: 15px 0;
+      padding: 0px 0;
       margin-top: auto;
       box-shadow: 0px 0px 10px 0px black;
     }
@@ -252,26 +249,26 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Header -->
   <header class="header-container">
     <div style="display: flex; align-items: center;">
       <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
-      <a href="" style="text-decoration: none;">
-        <span style="margin-left: 20%; font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
+      <img src="../../pictures/logo_2.png" alt="Logo" style="height: 40px; padding-left: 40px; padding-right: 20px;">
+      <a href="../../index.html" style="text-decoration: none;">
+        <span style="font-size: 3em; font-weight: bold; color: #333;">EchoBeads</span>
       </a>
     </div>
 
     <div class="cart-container" id="cartContainer">
       <div class="cart-icon" id="cartIcon">
-        <img src="pictures/shopping_cart.png" alt="Cart">
+        <img src="../../pictures/shopping_cart.png" alt="Cart">
         <span class="cart-badge" aria-live="polite" aria-atomic="true">0</span>
       </div>
       <div class="cart-dropdown" id="cartDropdown">
         <p class="empty">Your cart is empty.</p>
         <ul class="cart-items"></ul>
-        <a href="html/cart.html" class="view-cart">View Full Cart</a>
+        <a href="../cart.html" class="view-cart">View Full Cart</a>
       </div>
     </div>
   </header>
@@ -282,31 +279,27 @@
   <nav id="sidebar" class="sidebar">
     <button class="close-btn" onclick="closeSidebar()">✖</button>
     <h2>Menu</h2>
-    <a href="index.html">Home</a>
-    <a href="html/review.html">Review</a>
-    <a href="html/shop.html">Shop</a>
-    <a href="html/contact.html">Contact</a>
+    <a href="../../index.html">Home</a>
+    <a href="../review.html">Review</a>
+    <a href="../shop.html">Shop</a>
+    <a href="../contact.html">Contact</a>
   </nav>
 
-  <!-- Main Content -->
-  <main>
-    <h1>EchoBeads - Beads That Echo</h1>
-    <pre>Welcome to EchoBeads, your one-stop shop for all things beads!
-Here, you'll find a dazzling array of beads in every color, shape, and size imaginable.
-Whether you're a seasoned jewelry maker or just starting out, we've got the perfect beads to bring your creative visions to life.
-Our collection includes everything from classic glass beads to trendy acrylics, elegant pearls, and unique handmade designs.</pre>
 
-    <div class="content">
-      <button onclick="location.href='html/shop.html'" style="display: block; margin: 0 auto; padding: 15px 30px; font-size: 1.5em; background-color: #cc2121; color: white; border: none; border-radius: 6px; cursor: pointer;">Shop Now</button>
-    </div>
+  <!--Main Content-->
+  <main>
+    <h1>Loomband_bracelet</h1>
+    <pre>
+      Some text Here.
+    </pre>
   </main>
+
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; <span id="year"></span> EchoBeads.</p>
+    <p>&copy; <span id="year"></span> EchoBeads. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
