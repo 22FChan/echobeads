@@ -24,6 +24,7 @@
 <div id="debug"></div>
 <div>
   <p>You have 1 minute to do something. But what is it?! It's your job to figure out. Afterall, this is a puzzle game.</p>
+  <p style="color: gray;">Please enter answer as {Number}{Symbol}. For Example: 7c = Seven Of Clubs</p>
 </div>
 <script>
 // List of all card codes
@@ -83,13 +84,13 @@ document.getElementById("check-btn").addEventListener("click", () => {
   ];
 
   if(correctAnswers.includes(guess)) {
-    alert("Hmm! Isn't this a ID of some kind? c2826420-1c6e-4e51-a4fb-a62c1c5351c8");
+    window.location.href = "/pictures/";
     pickMissingCard();
     timeLeft = 60;
     showRandomCard();
   } else {
     alert("Wrong! Resetting all your progress! ");
-    pickMissingCard();
+    pickMissingCard();w
     timeLeft = 60;
     showRandomCard();
   }
