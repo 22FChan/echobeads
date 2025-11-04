@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Wait a tiny bit so users see "Redirecting..." if slow
+    setTimeout(() => {
+      // Get the path, remove leading/trailing slashes
+      let path = window.location.pathname.replace(/^\/|\/$/g, ""); 
+
+      // If empty path, go to home
+      if (!path) {
+        window.location.href = "/index.html";
+        return;
+      }
+
+      // Remove anything after . (e.g., "shop.html" -> "shop")
+      if (path.includes('.')) {
+        path = path.split('.')[0];
+      }
+
+      // Redirect to /html/[page].html
+      window.location.href = "/html/" + path + ".html";
+    }, 200); // 200ms delay for smoothness
+  </script>
+</head>
+<body>
+  <p>Redirecting…</p>
+</body>
+</html>

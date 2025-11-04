@@ -1,16 +1,13 @@
-<div id="header"></div>
+<body>
+  <div id="header"></div>
 
-<!-- Page content here -->
+  <main>
+    <h2>Welcome to my site!</h2>
+    <p>Just testing</p>
+    <img src="../images/10c.jpg">
+  </main>
 
-<div id="footer"></div>
+  <div id="footer"></div>
 
-<script>
-  async function includeHTML(id, file) {
-    const el = document.getElementById(id);
-    const res = await fetch(file);
-    if (res.ok) el.innerHTML = await res.text();
-  }
-
-  includeHTML("header", "header.html");
-  includeHTML("footer", "footer.html");
-</script>
+  <script src="../js/include.js"></script>
+</body>
