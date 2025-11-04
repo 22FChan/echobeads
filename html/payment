@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Us | Lazy MC</title>
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/pages/supportus.css" />
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <section id="support-us">
+        <div class="content">
+            <div class="supportus-content">
+
+                <!-- Title + Description -->
+                <div class="supportus-header">
+                    <h2 class="supportus-title">Support Us</h2>
+                    <p class="supportus-text">
+                        We strive to bring the best experience for our players — but we need your help to keep things running! You may purchase ranks to show off your support and get some perks in return. Your contributions help us maintain the server, improve performance, and add new features. Every little bit helps, and we truly appreciate your generosity!
+
+                    </p>
+                </div>
+
+                <!-- Box with Info + PayPal Form -->
+                <div class="supportus-box-container">
+                    <div class="supportus-box">
+                        <h3 class="supportus-box-title">Purchase a rank!</h3>
+                        <p class="supportus-box-text">
+                            Support LazyMC by purchasing a rank!
+                        </p>
+                        <ul class="supportus-list">
+                            <li>Stand OUT in the chat!</li>
+                            <li>Exclusive roles in DISCORD!</li>
+                            <li>More perks to come in the future!</li>
+                        </ul>
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick" />
+                            <input type="hidden" name="hosted_button_id" value="GHEX7PD56EZA4" />
+
+                            <div style="margin-bottom: 10px;">
+                                <label for="rank">Choose Rank:</label><br />
+                                <select name="os0" id="rank">
+                                    <option value="VIP">VIP – £2.99</option>
+                                    <option value="VIP+">VIP+ – £4.99</option>
+                                    <option value="MVP">MVP – £6.99</option>
+                                    <option value="MVP+">MVP+ – £9.99</option>
+                                </select>
+                            </div>
+
+                            <div style="margin-bottom: 10px;">
+                                <label for="discord">Discord Username:</label><br />
+                                <input type="text" name="os1" id="discord" maxlength="200" placeholder="2_enderman" required />
+                            </div>
+
+                            <input type="hidden" name="currency_code" value="GBP" />
+                            <input type="hidden" name="on0" value="Ranks" />
+                            <input type="hidden" name="on1" value="Discord Username" />
+
+                            <button type="submit" target="_blank" class="supportus-button">Continue with PayPal™</button>
+                            <br>
+                            <p style="font-size: 10px;">Please be aware that all purchases are non-refundable. </p>
+                        </form>
+                    </div>
+
+                    <!-- Voluntary Donation Box -->
+                    <div class="supportus-box">
+                        <h3 class="supportus-box-title">Voluntary Donation</h3>
+                        <p class="supportus-box-text">
+                            Donate any amount to support the server; everything counts!
+                        </p>
+                        <ul class="supportus-list">
+                            <li>Help the server GROW!</li>
+                            <li>Make the server BETTER!</li>
+                            <li>Get EXCLUSIVE perks!</li>
+                        </ul>
+                        <div id="donate-button-container">
+                            <div id="donate-button"></div>
+                            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+                            <script>
+                                PayPal.Donation.Button({
+                                    env: 'production',
+                                    hosted_button_id: 'M946NN3QS9TK6',
+                                    image: {
+                                        src: 'https://pics.paypal.com/00/s/MDBkY2ZmMmYtZjJlOC00N2EzLTgxZWMtNjgyNWYyNzY0MGFj/file.PNG',
+                                        alt: 'Donate with PayPal button',
+                                        title: 'PayPal - The safer, easier way to pay online!',
+                                    }
+                                }).render('#donate-button');
+                            </script>
+                        </div>
+
+                        <!--<button class="supportus-button"><a href="https://www.paypal.com/donate/?hosted_button_id=M946NN3QS9TK6">Donate via PayPal™</a></button>-->
+                        <p style="font-size: 10px;">Please be aware any donations are non-refundable!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Get URL params
+        const params = new URLSearchParams(window.location.search);
+        const selectedRank = params.get("s");
+
+        if (selectedRank) {
+            const rankDropdown = document.getElementById("rank");
+            if (rankDropdown) {
+                const index = parseInt(selectedRank);
+                if (!isNaN(index) && index >= 1 && index < rankDropdown.options.length) {
+                    rankDropdown.selectedIndex = index;
+                }
+            }
+        }
+    </script>
+
+    <div id="footer"></div>
+
+</body>
+</html>

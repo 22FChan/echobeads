@@ -21,6 +21,7 @@ async function includeHTML(id, file) {
 document.addEventListener("DOMContentLoaded", async () => {
   await includeHTML("header", "header.html");
   await includeHTML("footer", "footer.html");
+  await includeHTML("donate", "donate.html");
 
   initHeaderSidebarCart();
   updateCartDisplay();
