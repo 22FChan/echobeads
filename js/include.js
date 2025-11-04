@@ -1,6 +1,11 @@
 async function includeHTML(id, file) {
+  const redirectTo = "html/index.html";
   const el = document.getElementById(id);
-  if (!el) return;
+  if (!el) {
+    console.warn(`Element with id "${id}" not found. Redirecting...`);
+    window.location.href = redirectTo;
+    return;
+  }
   try {
     const res = await fetch(file);
     if (res.ok) {
@@ -19,6 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initHeaderSidebarCart();
   updateCartDisplay();
+
 });
 
 
