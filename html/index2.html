@@ -1,0 +1,16 @@
+<div id="header"></div>
+
+<!-- Page content here -->
+
+<div id="footer"></div>
+
+<script>
+  async function includeHTML(id, file) {
+    const el = document.getElementById(id);
+    const res = await fetch(file);
+    if (res.ok) el.innerHTML = await res.text();
+  }
+
+  includeHTML("header", "header.html");
+  includeHTML("footer", "footer.html");
+</script>
