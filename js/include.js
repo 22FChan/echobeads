@@ -1,5 +1,5 @@
 async function includeHTML(id, file) {
-  const redirectTo = "html/index.html";
+  const redirectTo = "/html/home.html";
   const el = document.getElementById(id);
   if (!el) {
     console.warn(`Element with id "${id}" not found. Redirecting...`);
