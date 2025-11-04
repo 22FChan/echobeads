@@ -327,5 +327,50 @@ Our collection includes everything from classic glass beads to trendy acrylics, 
       cartDropdown.classList.toggle('show');
     });
   </script>
+<script>
+  // --- CART FUNCTIONALITY ---
+  const cartBadge = document.querySelector('.cart-badge');
+  const cartDropdown = document.getElementById('cartDropdown');
+  const cartItemsList = document.querySelector('.cart-items');
+  const emptyText = document.querySelector('.empty');
+
+  // Get cart data from localStorage (or start with an empty array)
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Update badge + dropdown display
+  function updateCartDisplay() {
+    cartBadge.textContent = cart.length;
+
+    // If no items, show empty text
+    if (cart.length === 0) {
+      emptyText.style.display = 'block';
+      cartItemsList.innerHTML = '';
+    } else {
+      emptyText.style.display = 'none';
+      cartItemsList.innerHTML = cart
+        .map(item => `<li>${item.name} - £${item.price.toFixed(2)}</li>`)
+        .join('');
+    }
+  }
+
+  // Save the cart to localStorage
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  // Public function to add an item — can be called from shop.html
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    saveCart();
+    updateCartDisplay();
+  }
+
+  // On load, update display
+  updateCartDisplay();
+
+  // Expose addToCart globally (so other pages can call it)
+  window.addToCart = addToCart;
+</script>
+
 </body>
 </html>
