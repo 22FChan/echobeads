@@ -10,7 +10,8 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
   z-index: 9999;
   max-width: 300px;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.8s ease-in-out;
+  display: none;
 }
 
 .donation-content {
@@ -18,18 +19,20 @@
 }
 
 .donation-text {
-  margin: 0 0 8px;
-  font-size: 15px;
+  margin: 0 10px 20px;
+  font-size: 20px;
+  padding-right: 25px;
 }
 
 .donation-button {
   display: inline-block;
   background: var(--button-color);
   color: white;
-  padding: 8px 14px;
+  padding: 0px 14px;
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.2em;
 }
 
 .donation-button:hover {
@@ -38,13 +41,13 @@
 
 .close-popup {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -2px;
+  right: -2px;
   background: #444;
   color: white;
   border: none;
   border-radius: 30%;
-  font-size: 16px;
+  font-size: 20px;
   width: 25px;
   height: 25px;
   cursor: pointer;

@@ -1,3 +1,4 @@
+// --- Include HTML files dynamically ---
 async function includeHTML(id, file) {
   const redirectTo = "/html/home.html";
   const el = document.getElementById(id);
@@ -18,20 +19,19 @@ async function includeHTML(id, file) {
   }
 }
 
+// --- Initialize header, footer, donate, cart ---
 document.addEventListener("DOMContentLoaded", async () => {
   await includeHTML("header", "header.html");
   await includeHTML("footer", "footer.html");
   await includeHTML("donate", "donate.html");
 
   initHeaderSidebarCart();
+  initDonationPopup();
   updateCartDisplay();
-
 });
 
-
-
+// --- Header, sidebar, cart ---
 function initHeaderSidebarCart() {
-  // To toggle the sidebar
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
   const menuToggle = document.querySelector('.menu-toggle');
@@ -57,7 +57,7 @@ function initHeaderSidebarCart() {
   });
 }
 
-// Make the cart display thingy
+// --- Cart functionality ---
 const cartBadge = document.querySelector('.cart-badge');
 const cartItemsList = document.querySelector('.cart-items');
 const emptyText = document.querySelector('.empty');
@@ -88,5 +88,27 @@ function addToCart(name, price) {
   updateCartDisplay();
 }
 
-// Make addToCart global for other pages
 window.addToCart = addToCart;
+
+// --- Donation Popup ---
+function initDonationPopup() {
+  const popup = document.getElementById("donation-popup");
+  if (!popup) return;
+
+  const lastShown = localStorage.getItem("donationLastShown");
+  const now = Date.now();
+  const FIVE_MINUTES = 10000;
+
+  if (!lastShown || now - parseInt(lastShown, 10) > FIVE_MINUTES) {
+    setTimeout(() => {
+      popup.style.display = "block";
+      localStorage.setItem("donationLastShown", Date.now().toString());
+    }, 2000);
+  }
+
+  const closeBtn = popup.querySelector(".close-popup");
+  closeBtn?.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+}
+

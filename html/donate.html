@@ -1,33 +1,13 @@
-<script>
-  function detectMob() {
-    return (window.innerWidth <= 867);
-  }
-
-  function startDonation() {
-    if (detectMob()) {
-      document.getElementById("donation-popup").style.display = "none";
-      console.log("Not mobile, donation shown.");
-    } else {
-      console.log("Mobile detected, donation hidden.");
-    }
-  }
-
-  function debug() {
-    console.log("detectMob:", detectMob());
-    console.log("innerWidth:", window.innerWidth);
-    console.log("innerHeight:", window.innerHeight);
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    startDonation();
-    debug();
-  });
-</script>
+<!---->
+<head>
+    <link rel="stylesheet" href="../css/donate.css">
+</head>
+<!---->
 
 <div id="donation-popup" class="donation-popup">
   <div class="donation-content">
-    <p class="donation-text">If you want to support us, please donate here.</p>
+    <p class="donation-text">Please Donate here.</p>
     <a href="/supportus" class="donation-button" target="_blank">Donate Now</a>
-    <button class="close-popup" onclick="document.getElementById('donation-popup').style.display='none'">x</button>
+    <button class="close-popup">x</button>
   </div>
 </div>
