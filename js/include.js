@@ -1,18 +1,17 @@
 // --- Include HTML files dynamically ---
 async function includeHTML(id, file) {
-  const redirectTo = "/html/home.html";
   const el = document.getElementById(id);
   if (!el) {
-    console.warn(`Element with id "${id}" not found. Redirecting...`);
-    window.location.href = redirectTo;
+    console.warn(`Element with id "${id}" not found. Skipping include for ${file}.`);
     return;
   }
+
   try {
     const res = await fetch(file);
     if (res.ok) {
       el.innerHTML = await res.text();
     } else {
-      el.innerHTML = "<!-- Failed to load " + file + " -->";
+      el.innerHTML = `<!-- Failed to load ${file} (status ${res.status}) -->`;
     }
   } catch (err) {
     console.error("Error including", file, err);
@@ -21,9 +20,9 @@ async function includeHTML(id, file) {
 
 // --- Initialize header, footer, donate, cart ---
 document.addEventListener("DOMContentLoaded", async () => {
-  await includeHTML("header", "header.html");
-  await includeHTML("footer", "footer.html");
-  await includeHTML("donate", "donate.html");
+  await includeHTML("header", "/html/header.html");
+  await includeHTML("footer", "/html/footer.html");
+  await includeHTML("donate", "/html/donate.html");
 
   initHeaderSidebarCart();
   initDonationPopup();
