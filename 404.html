@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <script>
-    setTimeout(async () => {
-      let path = window.location.pathname.replace(/^\/|\/$/g, "");
- 
-      if (path.includes('.')) {
-        path = path.split('.')[0];
-      }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 – Page Not Found | Echo Beads</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
 
-      const target = "/html/" + path + ".html";
+    h1 {
+      font-size: 4rem;
+      margin: 0.2em 0;
+      color: #222;
+    }
 
-      try {
-        const res = await fetch(target);
-        if (res.ok) {
-          window.location.href = target;
-        } else {
-          window.location.href = "/index.html";
-        }
-      } catch (err) {
-        window.location.href = "/index.html";
-      }
+    p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 400px;
+      margin-bottom: 1.5em;
+    }
 
-    }, 200);
-  </script>
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 0.8em 1.6em;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting…</p>
+  <h1>404</h1>
+  <p>Oops! The page you’re looking for doesn’t exist.</p>
+  <button onclick="window.location.href='/'">Go Back Home</button>
 </body>
 </html>
